@@ -10,5 +10,5 @@ package bibliotecagrupo3.Models;
  * Rodrigo
  */
 public class Prestamo {
-    
+    // aca tengo que poner todos mis atributos
 }
