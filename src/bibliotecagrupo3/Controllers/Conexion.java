@@ -21,7 +21,7 @@ public class Conexion {
     private Connection conexion;
     
     public Conexion() throws ClassNotFoundException{
-            Class.forName("org.mariadb.jdbc.Driver");
+        Class.forName("org.mariadb.jdbc.Driver");
     }
     
     public Conexion(String url, String usuario, String password) throws ClassNotFoundException {

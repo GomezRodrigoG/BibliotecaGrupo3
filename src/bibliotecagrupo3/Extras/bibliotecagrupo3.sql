@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2021 a las 00:42:47
+-- Tiempo de generación: 04-06-2021 a las 00:53:39
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -113,7 +113,7 @@ CREATE TABLE `prestamo` (
   `dni_lector` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `fecha` date NOT NULL,
-  `fecha_devolucion` date NOT NULL
+  `fecha_devolucion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -189,7 +189,7 @@ ALTER TABLE `multa`
 -- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
