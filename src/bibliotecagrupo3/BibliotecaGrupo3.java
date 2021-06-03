@@ -21,8 +21,6 @@ public class BibliotecaGrupo3 {
      */
     public static void main(String[] args) {
         try {
-            // TODO code application logic here
-
             Conexion conexion = new Conexion();
             
             JOptionPane.showMessageDialog(null,"Se cargo correctamente");
