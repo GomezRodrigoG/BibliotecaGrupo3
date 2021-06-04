@@ -6,6 +6,7 @@
 package bibliotecagrupo3;
 
 import bibliotecaGrupo3.Controllers.Conexion;
+import bibliotecagrupo3.Controllers.PrestamoData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,6 +23,10 @@ public class BibliotecaGrupo3 {
     public static void main(String[] args) {
         try {
             Conexion conexion = new Conexion();
+            
+            PrestamoData pData = new PrestamoData(conexion);
+            
+            
             
             JOptionPane.showMessageDialog(null,"Se cargo correctamente");
             

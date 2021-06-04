@@ -7,6 +7,7 @@ package bibliotecagrupo3.Controllers;
 
 import bibliotecagrupo3.Models.Lector;
 import bibliotecagrupo3.Models.Prestamo;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class PrestamoData {
         this.conexion = conexion.getConexion();
     }
     
-    public void guardarPrestamo(Prestamo prestamo){
+    public void crearNuevoPrestamo(Prestamo prestamo){
         // id_prestamo | id_multa | id_ejemplar | dni_lector | estado | fecha | fecha_devolucion
         String query = "INSERT INTO prestamo VALUES (null, null, ?, ?, true, ?, null)";
         
@@ -39,13 +40,24 @@ public class PrestamoData {
             statement.setInt(2, materia.getAnio());
             statement.setBoolean(3, materia.isEstado());
             */
+            
+            //TODO activar esto cuando este el ejemplar listo
+            // statement.setInt(1, prestamo.getEjemplar().getId_ejemplar());
+            statement.setInt(1, 6);
+            
+            //TODO activar esto cuando este el lector listo
+            // statement.setInt(2, prestamo.getLector().getDni());
+            statement.setInt(2,91234567);
+            
+            statement.setDate(3, Date.valueOf(LocalDate.now()));
+            
             statement.executeUpdate();
             
             ResultSet rSet = statement.getGeneratedKeys();
             
             if(rSet.next()){
                 // materia.setId_materia(rSet.getInt(1));
-                JOptionPane.showMessageDialog(null,"Materia guardada correctamente.");
+                JOptionPane.showMessageDialog(null,"Prestamo guardado correctamente.");
             } else {
                 JOptionPane.showMessageDialog(null,"No se guardo.");
             }
@@ -53,7 +65,7 @@ public class PrestamoData {
             statement.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al guardar una materia.");
+            JOptionPane.showMessageDialog(null,"Error al guardar un prestamo.");
         }
     }
     
