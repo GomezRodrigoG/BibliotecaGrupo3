@@ -163,7 +163,7 @@ public class LectorData {
         
         PrestamoData prestamoData = new PrestamoData(con);
         
-        ArrayList <Prestamo> lista = prestamoData.getPrestamosByLector(this.buscarLector(dni));
+        ArrayList <Prestamo> lista = prestamoData.getByLector(this.buscarLector(dni));
         
         for(Prestamo prestamo:lista){
             if(prestamo.isEstado()&&(ChronoUnit.DAYS.between(prestamo.getFecha(), LocalDate.now())>90)){
@@ -200,7 +200,7 @@ public class LectorData {
         
         PrestamoData prestamoData = new PrestamoData(con);
         
-        ArrayList <Prestamo> lista = prestamoData.getPrestamosByLector(this.buscarLector(dni));
+        ArrayList <Prestamo> lista = prestamoData.getByLector(this.buscarLector(dni));
         
         for(Prestamo prestamo:lista){
             if((prestamo.getMulta().getId_multa()!=0)&&(ChronoUnit.DAYS.between(prestamo.getMulta().getFecha_fin(), LocalDate.now())<=0)||(prestamo.isEstado())){
