@@ -13,27 +13,27 @@ import java.time.LocalDate;
  */
 public class Prestamo {
     private int id_prestamo;
-    private int id_multa;
-    private int id_ejemplar;
-    private int dni_lector;
+    private Multa multa;
+    private Ejemplar ejemplar;
+    private Lector lector;
     private boolean estado;
     private LocalDate fecha;
     private LocalDate fecha_devolucion;
 
-    public Prestamo(int id_prestamo, int id_multa, int id_ejemplar, int dni_lector, boolean estado, LocalDate fecha, LocalDate fecha_devolucion) {
+    public Prestamo(int id_prestamo, Multa multa, Ejemplar ejemplar, Lector lector, boolean estado, LocalDate fecha, LocalDate fecha_devolucion) {
         this.id_prestamo = id_prestamo;
-        this.id_multa = id_multa;
-        this.id_ejemplar = id_ejemplar;
-        this.dni_lector = dni_lector;
+        this.multa = multa;
+        this.ejemplar = ejemplar;
+        this.lector = lector;
         this.estado = estado;
         this.fecha = fecha;
         this.fecha_devolucion = fecha_devolucion;
     }
     
-    public Prestamo(int id_multa, int id_ejemplar, int dni_lector, boolean estado, LocalDate fecha, LocalDate fecha_devolucion) {
-        this.id_multa = id_multa;
-        this.id_ejemplar = id_ejemplar;
-        this.dni_lector = dni_lector;
+    public Prestamo(Multa multa, Ejemplar ejemplar, Lector lector, boolean estado, LocalDate fecha, LocalDate fecha_devolucion) {
+        this.multa = multa;
+        this.ejemplar = ejemplar;
+        this.lector = lector;
         this.estado = estado;
         this.fecha = fecha;
         this.fecha_devolucion = fecha_devolucion;
@@ -49,28 +49,28 @@ public class Prestamo {
         this.id_prestamo = id_prestamo;
     }
 
-    public int getId_multa() {
-        return id_multa;
+    public Multa getMulta() {
+        return multa;
     }
 
-    public void setId_multa(int id_multa) {
-        this.id_multa = id_multa;
+    public void setMulta(Multa multa) {
+        this.multa = multa;
     }
 
-    public int getId_ejemplar() {
-        return id_ejemplar;
+    public Ejemplar getEjemplar() {
+        return ejemplar;
     }
 
-    public void setId_ejemplar(int id_ejemplar) {
-        this.id_ejemplar = id_ejemplar;
+    public void setEjemplar(Ejemplar ejemplar) {
+        this.ejemplar = ejemplar;
     }
 
-    public int getDni_lector() {
-        return dni_lector;
+    public Lector getLector() {
+        return lector;
     }
 
-    public void setDni_lector(int dni_lector) {
-        this.dni_lector = dni_lector;
+    public void setLector(Lector lector) {
+        this.lector = lector;
     }
 
     public boolean isEstado() {
@@ -99,6 +99,6 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        return "Prestamo{" + "id_prestamo=" + id_prestamo + ", id_ejemplar=" + id_ejemplar + ", dni_lector=" + dni_lector + ", estado=" + estado + '}';
+        return "Prestamo{" + "id_prestamo=" + id_prestamo + ", multa=" + multa + ", ejemplar=" + ejemplar + ", lector=" + lector + ", estado=" + estado + ", fecha=" + fecha + ", fecha_devolucion=" + fecha_devolucion + '}';
     }
 }
