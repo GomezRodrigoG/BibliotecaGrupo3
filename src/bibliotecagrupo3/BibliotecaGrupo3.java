@@ -16,12 +16,17 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import bibliotecaGrupo3.Controllers.Conexion;
 import bibliotecagrupo3.Controllers.AutorData;
+import bibliotecagrupo3.Controllers.EjemplarData;
+
 import bibliotecagrupo3.Controllers.LibroData;
 import bibliotecagrupo3.Controllers.PrestamoData;
 import bibliotecagrupo3.Controllers.LectorData;
+import bibliotecagrupo3.Controllers.MultaData;
 import bibliotecagrupo3.Models.Lector;
 import bibliotecagrupo3.Models.Autor;
+import bibliotecagrupo3.Models.Ejemplar;
 import bibliotecagrupo3.Models.Libro;
+import bibliotecagrupo3.Models.Multa;
 import bibliotecagrupo3.Models.Prestamo;
 
 /**
@@ -62,8 +67,26 @@ public class BibliotecaGrupo3 {
 //                }
             
             // pData.crear(prestamo);
-            pData.borrar(5);
-
+            //pData.borrar(5);
+            
+            //PRUEVA DE EJEMPLAR
+            EjemplarData eData = new EjemplarData(conexion);
+            Ejemplar ejemplar = new Ejemplar("Disponible",3);
+            //eData.guardarEjemplar(ejemplar);
+            //ejemplar.setEstado("En Reparacion");
+           // eData.actualizarEjemplar(ejemplar);
+           // eData.buscarEjemplar(0);
+            //eData.eliminarEjemplar(0);
+            
+            //Prueba de Multa
+            MultaData mData= new MultaData(conexion);
+            Multa multa = new Multa();
+           // mData.guardarMulta(3);
+           //multa=mData.buscarMulta(7);
+          // multa.setFecha_inicio(LocalDate.of(2021,06,04));
+           // mData.eliminarMulta(7);
+           //mData.modificarMulta(multa);
+           // System.out.println(multa);
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar los driver de conexion");
         }catch (SQLException ex) {

@@ -6,18 +6,20 @@
 package bibliotecagrupo3.Controllers;
 
 import bibliotecagrupo3.Models.Ejemplar;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import bibliotecaGrupo3.Controllers.Conexion;
 
 /**
  *
  * Pablo
  */
 public class EjemplarData {
-      private Conexion conexion ;
+      private Connection  conexion ;
 
     public EjemplarData(Conexion conexion) throws SQLException {
         this.conexion = conexion.getConexion();
@@ -26,7 +28,7 @@ public class EjemplarData {
     
     public void guardarEjemplar(Ejemplar ejemplar){
         
-        String query = "INSERT INTO ejemplar VALUES (null,, ?, ?)";
+        String query = "INSERT INTO ejemplar VALUES (null,?,?)";
         
         try {
             PreparedStatement statement = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -72,14 +74,14 @@ public class EjemplarData {
     
     }
     
-    public void eliminarEjemplar(Ejemplar ejemplar){
+    public void eliminarEjemplar(int id_ejemplar){
     
         String query = "DELETE FROM ejemplar WHERE id_ejemplar=?  ";
 
         try {
             PreparedStatement ps=conexion.prepareStatement(query);
            
-            ps.setInt(1,ejemplar.getId_ejemplar());          
+            ps.setInt(1,id_ejemplar);          
            
             if(ps.executeUpdate()==1){
                 JOptionPane.showMessageDialog(null, "Se Elimino el Ejemplar con Exito");

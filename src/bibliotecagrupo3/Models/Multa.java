@@ -60,5 +60,8 @@ public class Multa {
         this.fecha_fin = fecha_fin;
     }
     
-    
+   @Override
+    public String toString(){
+    return ("Id_Multa: "+id_multa+" "+"Fecha de inicio: "+fecha_inicio+" "+"Fecha de fin: "+fecha_fin);
+    }
 }
