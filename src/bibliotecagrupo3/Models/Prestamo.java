@@ -30,11 +30,22 @@ public class Prestamo {
         this.fecha_devolucion = fecha_devolucion;
     }
     
-    public Prestamo(Multa multa, Ejemplar ejemplar, Lector lector, boolean estado, LocalDate fecha, LocalDate fecha_devolucion) {
-        this.multa = multa;
+    // constructor extra, especialmente utilizado para la creacion de un nuevo prestamo
+    public Prestamo(Ejemplar ejemplar, Lector lector) {
         this.ejemplar = ejemplar;
         this.lector = lector;
-        this.estado = estado;
+    }
+    
+    // constructor extra, especialmente utilizado para la modificacion de un prestamo
+    public Prestamo(int id_prestamo, Ejemplar ejemplar, Lector lector) {
+        this.id_prestamo = id_prestamo;
+        this.ejemplar = ejemplar;
+        this.lector = lector;
+    }
+    
+    // constructor extra, especialmente utilizado para la devolucion de un prestamo
+    public Prestamo(int id_prestamo, LocalDate fecha, LocalDate fecha_devolucion) {
+        this.id_prestamo = id_prestamo;
         this.fecha = fecha;
         this.fecha_devolucion = fecha_devolucion;
     }
@@ -99,6 +110,10 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        return "Prestamo{" + "id_prestamo=" + id_prestamo + ", multa=" + multa + ", ejemplar=" + ejemplar + ", lector=" + lector + ", estado=" + estado + ", fecha=" + fecha + ", fecha_devolucion=" + fecha_devolucion + '}';
+        if(this.multa == null){
+            return "Prestamo{" + "id_prestamo=" + id_prestamo + ", multa= Sin Multa, ejemplarId=" + ejemplar.getId_ejemplar() + ", lectorDNI=" + lector.getDni() + ", estado=" + estado + ", fecha=" + fecha + ", fecha_devolucion=" + fecha_devolucion + '}';
+        }
+        
+        return "Prestamo{" + "id_prestamo=" + id_prestamo + ", multa=" + multa.getId_multa() + ", ejemplarId=" + ejemplar.getId_ejemplar() + ", lectorDNI=" + lector.getDni() + ", estado=" + estado + ", fecha=" + fecha + ", fecha_devolucion=" + fecha_devolucion + '}';
     }
 }

@@ -50,10 +50,56 @@ public class BibliotecaGrupo3 {
             //ld.guardarLibro(libro1);
             //ld.borrarLibro(10);
             //ld.modificarLibro(libro1);
+            
+            
             // ---- Pruebas de prestamo ----
             PrestamoData pData = new PrestamoData(conexion);
-            Prestamo prestamo = new Prestamo();
-                LectorData lectorData = new LectorData(conexion);
+            // mocks
+            Ejemplar ejemplarParaPrestamo = new Ejemplar(6,"Disponible",1);
+            Ejemplar ejemplarParaModificarPrestamo = new Ejemplar(7,"Disponible",1);
+            Lector lectorParaPrestamo = new Lector(91234567, "pringles 1906", "Gillermo", "scheloto", true);
+            Prestamo prestamo = new Prestamo(ejemplarParaPrestamo, lectorParaPrestamo);
+            Prestamo modificarPrestamo = new Prestamo(5, ejemplarParaModificarPrestamo, lectorParaPrestamo);
+            String  mockDate = "2021-06-04";
+            String mockDevolucionDate = "2021-06-08";
+            Prestamo devolverPrestamo = new Prestamo(6, LocalDate.parse(mockDate),LocalDate.parse(mockDevolucionDate));
+            Multa mockMulta = new Multa(5, LocalDate.parse(mockDate), LocalDate.parse(mockDevolucionDate));
+            
+            // ----crear
+            // pData.crear(prestamo);
+            // ----borrar
+            // pData.borrar(5);
+            // ----modificar
+            // pData.modificar(modificarPrestamo);
+            // ----devolver prestamo CON multa
+            // devolverPrestamo.setMulta(mockMulta);
+            // pData.devolverConMulta(devolverPrestamo);
+            // ----devolver prestamo SIN multa
+            // pData.devolverSinMulta(devolverPrestamo);
+            //----obtener prestamos de todo el mes dada una fecha especifica
+            ArrayList<Prestamo> auxPrestamosArr = pData.getByDate(LocalDate.now());
+            
+            for(Prestamo prestamoItem :auxPrestamosArr){
+                Multa auxMulta = prestamoItem.getMulta();
+                if(auxMulta != null){
+                    System.out.println("Multa" +  auxMulta);
+                }
+                System.out.println(prestamoItem);
+            }
+            //----obtener prestamos dado un lector
+//            ArrayList<Prestamo> auxPrestamosArr = pData.getByLector(lectorParaPrestamo);
+//            
+//            for(Prestamo prestamoItem :auxPrestamosArr){
+//                Multa auxMulta = prestamoItem.getMulta();
+//                if(auxMulta != null){
+//                    System.out.println("Multa" +  auxMulta);
+//                }
+//                System.out.println(prestamoItem);
+//            }
+            
+            
+            // ---- Pruebas de Lector ----
+            LectorData lectorData = new LectorData(conexion);
 //                LocalDate fecha = LocalDate.of(2021, 4, 1);
 //                Lector lector = new Lector(11111111, "pringles 1906", "Gillermo", "scheloto", true);
 //                lectorData.guardarLector(lector);
@@ -66,8 +112,7 @@ public class BibliotecaGrupo3 {
 //                    System.out.println(caca);
 //                }
             
-            // pData.crear(prestamo);
-            //pData.borrar(5);
+            
             
             //PRUEVA DE EJEMPLAR
             EjemplarData eData = new EjemplarData(conexion);
@@ -82,10 +127,10 @@ public class BibliotecaGrupo3 {
             MultaData mData= new MultaData(conexion);
             Multa multa = new Multa();
            // mData.guardarMulta(3);
-           //multa=mData.buscarMulta(7);
-          // multa.setFecha_inicio(LocalDate.of(2021,06,04));
+           // multa=mData.buscarMulta(7);
+           // multa.setFecha_inicio(LocalDate.of(2021,06,04));
            // mData.eliminarMulta(7);
-           //mData.modificarMulta(multa);
+           // mData.modificarMulta(multa);
            // System.out.println(multa);
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar los driver de conexion");
