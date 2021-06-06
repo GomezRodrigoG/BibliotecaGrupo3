@@ -39,7 +39,7 @@ public class BibliotecaGrupo3 {
             Libro libro1 = new Libro(7,"El chapulin colorado","Biblioteca Mexicana",1997,"Comedia",8);
             //ld.guardarLibro(libro1);
             //ld.borrarLibro(10);
-            ld.modificarLibro(libro1);
+            //ld.modificarLibro(libro1);
             // ---- Pruebas de prestamo ----
             PrestamoData pData = new PrestamoData(conexion);
             
