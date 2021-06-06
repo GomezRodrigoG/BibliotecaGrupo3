@@ -6,6 +6,7 @@
 package bibliotecagrupo3.Controllers;
 
 import bibliotecagrupo3.Models.Multa;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,13 +14,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
-
+import bibliotecaGrupo3.Controllers.Conexion;
 /**
  *
  * Pablo
  */
 public class MultaData {
-     private Conexion conexion ;
+     private Connection  conexion ;
 
     public MultaData(Conexion conexion) throws SQLException {
         this.conexion = conexion.getConexion();
@@ -31,11 +32,11 @@ public class MultaData {
          
         try {
             PreparedStatement statement = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            
+            int dias = (libros*2);
          
             statement.setDate(1,Date.valueOf(LocalDate.now()));
             //Suma los dias de multa para agregarlos a la fecha final
-            statement.setDate(2,Date.valueOf(LocalDate.now().plusDays(libros*2) ));
+            statement.setDate(2,Date.valueOf(LocalDate.now().plusDays(dias)));
             
          
             statement.executeUpdate();
@@ -119,10 +120,10 @@ public class MultaData {
            
            
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null,"El alumno ingresado se actualizo");
+            JOptionPane.showMessageDialog(null,"La Multa ingresada se actualizo");
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"El alumno ingresado no se pudo actualizar");
+            JOptionPane.showMessageDialog(null,"La Multa ingresada no se pudo actualizar");
         }  
     
     } 

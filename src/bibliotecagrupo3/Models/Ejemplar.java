@@ -53,6 +53,10 @@ public class Ejemplar {
         this.isbn_libro = isbn_libro;
     }
 
+    @Override
+    public String toString(){ 
     
+        return ("Id_Ejemplar: "+id_ejemplar+" "+"Estado: "+estado+" Isbn_libro "+isbn_libro);
+    }
 }
 
