@@ -72,7 +72,9 @@ public class PrestamoData {
             JOptionPane.showMessageDialog(null,"Error al guardar un prestamo.");
         }
     }
-    
+    /**
+    * Buscar un prestamo por su id en la base
+    */
     public Prestamo buscar(int id){
         String query="select * from prestamo where id_prestamo = ?";
         Prestamo toRet = null;
