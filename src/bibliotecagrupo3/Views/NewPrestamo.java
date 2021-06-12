@@ -89,8 +89,18 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
         });
 
         jBSalir.setText("SALIR");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         jBLimpiar.setText("LIMPIAR");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("GUARDAR");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +208,6 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
             
             //si la multa si existe, verifico si ya paso
             if(multa != null){
-                System.out.println("encontre una multa");
                 if(multa.getFecha_fin().isAfter(LocalDate.now())){
                     JOptionPane.showMessageDialog(null,"El lector tiene una multa activa por lo que no podra solicitar un prestamo.");
                     return;
@@ -212,12 +221,12 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
             LocalDate fechaPlus30 = prestamo.getFecha().plusDays(30);
             LocalDate fechaPlus90 = prestamo.getFecha().plusDays(90);
             
-            if(fechaPlus30.isAfter(LocalDate.now())){
+            if(fechaPlus30.isBefore(LocalDate.now())){
                 this.ejemplar.setEstado("retraso");
         
                 eData.actualizarEjemplar(this.ejemplar);
                 
-                if(fechaPlus90.isAfter(LocalDate.now())){
+                if(fechaPlus90.isBefore(LocalDate.now())){
                     JOptionPane.showMessageDialog(null, "El lector tiene un prestamo vencido hace mas de 90 dias. Por lo que sera dado de baja.");
                     
                     try {
@@ -248,6 +257,8 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
         eData.actualizarEjemplar(prestamo.getEjemplar());
         
         pData.crear(prestamo);
+        
+        limpiar();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBVerificarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVerificarEjemplarActionPerformed
@@ -271,6 +282,22 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
         this.ejemplar = ejemplar;
     }//GEN-LAST:event_jBVerificarEjemplarActionPerformed
 
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void limpiar(){
+        jTFDniLector.setText("");
+        jTFIdEjemplar.setText("");
+        verifiedDni = false;
+        verifiedEjemplar = false;
+        lector = null;
+        ejemplar = null;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;

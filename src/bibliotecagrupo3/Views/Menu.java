@@ -39,6 +39,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPrestamos = new javax.swing.JMenu();
         jMICrearPrestamo = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemPrestamoByDate = new javax.swing.JMenuItem();
         jMenuItemPrestamosByLector = new javax.swing.JMenuItem();
@@ -58,9 +59,9 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 477, Short.MAX_VALUE)
         );
 
-        jMenuPrestamos.setText("Mis cositas");
+        jMenuPrestamos.setText("Prestamo");
 
-        jMICrearPrestamo.setText("Crear Prestamo");
+        jMICrearPrestamo.setText("Crear");
         jMICrearPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMICrearPrestamoActionPerformed(evt);
@@ -68,7 +69,15 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuPrestamos.add(jMICrearPrestamo);
 
-        jMenuItem1.setText("Prestamos");
+        jMenuItem3.setText("Devolver");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuPrestamos.add(jMenuItem3);
+
+        jMenuItem1.setText("Buscar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -157,6 +166,22 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(npView);
     }//GEN-LAST:event_jMICrearPrestamoActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        DevolverPrestamo dpView = null;
+        
+        try {
+            dpView = new DevolverPrestamo(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        dpView.setVisible(true);
+        escritorio.add(dpView);
+        escritorio.moveToFront(dpView);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,6 +227,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemPrestamoByDate;
     private javax.swing.JMenuItem jMenuItemPrestamosByLector;
     private javax.swing.JMenu jMenuPrestamos;

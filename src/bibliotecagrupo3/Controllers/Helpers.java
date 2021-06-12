@@ -12,6 +12,13 @@ import javax.swing.JOptionPane;
  * @author Rodrigo
  */
 public class Helpers {
+    /**
+     * 
+     * @param text El String que queremos verificar
+     * @param nullMessage El mensaje a mostrar en caso que el string este vacio
+     * @param onlyNumbersMessage Mensaje a mostrar en caso que no sea un numero
+     * @return 
+     */
     public static int parseStringToInt(String text,String nullMessage, String onlyNumbersMessage){
         int toRet = 0;
         
