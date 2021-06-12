@@ -35,14 +35,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu3 = new javax.swing.JMenu();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jmiOperaciones = new javax.swing.JMenuItem();
         jmiPrestamosVencidos = new javax.swing.JMenuItem();
         jmiMultasMes = new javax.swing.JMenuItem();
+        jmiOperaciones = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jmLibro = new javax.swing.JMenu();
+        jrmiMenu = new javax.swing.JRadioButtonMenuItem();
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,14 +63,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Lector");
-
-        jmiOperaciones.setText("Operaciones");
-        jmiOperaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiOperacionesActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiOperaciones);
 
         jmiPrestamosVencidos.setText("Prestamos Vencidos");
         jmiPrestamosVencidos.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +80,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jmiMultasMes);
 
+        jmiOperaciones.setText("Operaciones");
+        jmiOperaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiOperacionesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiOperaciones);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
@@ -91,6 +96,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
+
+        jmLibro.setText("Libro");
+        jmLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmLibroActionPerformed(evt);
+            }
+        });
+
+        jrmiMenu.setSelected(true);
+        jrmiMenu.setText("Libro");
+        jrmiMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrmiMenuActionPerformed(evt);
+            }
+        });
+        jmLibro.add(jrmiMenu);
+
+        jMenuBar1.add(jmLibro);
 
         setJMenuBar(jMenuBar1);
 
@@ -153,6 +176,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiMultasMesActionPerformed
 
+    private void jmLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmLibroActionPerformed
+
+    }//GEN-LAST:event_jmLibroActionPerformed
+
+    private void jrmiMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrmiMenuActionPerformed
+        try {
+            // TODO add your handling code here:
+            escritorio.removeAll();
+            escritorio.repaint();
+            LibroView lv = new LibroView(conexion);
+            lv.setVisible(true);
+            escritorio.add(lv);
+            escritorio.moveToFront(lv);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+    }//GEN-LAST:event_jrmiMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -196,10 +237,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jmLibro;
     private javax.swing.JMenuItem jmiMultasMes;
     private javax.swing.JMenuItem jmiOperaciones;
     private javax.swing.JMenuItem jmiPrestamosVencidos;
+    private javax.swing.JRadioButtonMenuItem jrmiMenu;
     // End of variables declaration//GEN-END:variables
 }
