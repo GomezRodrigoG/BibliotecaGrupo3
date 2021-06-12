@@ -28,6 +28,9 @@ public class Autor {
         this.nacionalidad = nacionalidad;
     }
 
+    public Autor() {
+    }
+
     public void setId_autor(int id_autor) {
         this.id_autor = id_autor;
     }
@@ -74,6 +77,11 @@ public class Autor {
 
     public String getNacionalidad() {
         return nacionalidad;
+    }
+
+    @Override
+    public String toString() {
+        return   "\nNombre: " + nombre + "\nApellido: " + apellido +"\nDni: " + dni+ "\nFecha Nacimiento: " + fecha_nac + "\nNacionalidad: " + nacionalidad +"\n--------------------------------\n";
     }
     
     
