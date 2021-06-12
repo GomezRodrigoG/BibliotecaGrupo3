@@ -71,7 +71,7 @@ public class Lector {
 
     @Override
     public String toString() {
-        return dni+" "+nombre+" "+apellido;
+        return dni+"-"+nombre+"-"+apellido;
     }
     
     

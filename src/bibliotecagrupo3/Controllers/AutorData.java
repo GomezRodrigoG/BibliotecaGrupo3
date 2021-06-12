@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import bibliotecaGrupo3.Controllers.Conexion;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * Nahuel
@@ -52,19 +54,29 @@ public class AutorData {
         }
        
     }
-    public void eliminarAutor(int dni){
+    public Autor buscarAutor(int dni){
+        String query = "SELECT * FROM autor WHERE autor.dni = ?";
+            Autor autor=null;
         try {
-            String query ="DELETE FROM autor WHERE dni=?";
-            PreparedStatement ps=con.prepareStatement(query);
+            PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, dni);
-            if(ps.executeUpdate()==1){
-            JOptionPane.showMessageDialog(null, "Autor borrado");
-            }else{
-            JOptionPane.showMessageDialog(null, "Autor NO eliminado");}
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+            autor = new Autor();
+            autor.setId_autor(rs.getInt("id_autor"));
+            autor.setDni(rs.getInt("dni"));
+            autor.setNombre(rs.getString("nombre"));
+            autor.setApellido(rs.getString("apellido"));
+            autor.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
+            autor.setNacionalidad(rs.getString("nacionalidad"));
+            }
+            ps.close();
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
-        }    
-}
+            Logger.getLogger(AutorData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return autor;
+    }
     public void modificarAutor(Autor autor){
         try {
             String query = "UPDATE autor SET  nombre=?, apellido=?, fecha_nac=?, nacionalidad=? WHERE dni=?";
@@ -84,9 +96,50 @@ public class AutorData {
             JOptionPane.showMessageDialog(null, "Error SQL");
         }
     }
-    /*public void bajaLogica(int dni){
-        String query = "UPDATE alumno SET estado=false"
-    }*/
+    public void eliminarAutor(int dni){
+        try {
+            String query ="DELETE FROM autor WHERE dni=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setInt(1, dni);
+            if(ps.executeUpdate()==1){
+            JOptionPane.showMessageDialog(null, "Autor borrado");
+            }else{
+            JOptionPane.showMessageDialog(null, "Autor NO eliminado");}
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error SQL");
+        }    
+}
+    
+    
+    public List<Autor> getAllAutores(){
+        String query="SELECT * FROM autor ";
+        Autor autor;
+        List<Autor> autores = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query); 
+                 ResultSet rs=ps.executeQuery();
+                while(rs.next()){
+                    autor = new Autor();
+                    autor.setId_autor(rs.getInt("id_autor"));
+                    autor.setDni(rs.getInt("dni"));
+                    autor.setNombre(rs.getString("nombre"));
+                    autor.setApellido(rs.getString("apellido"));
+                    autor.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
+                    autor.setNacionalidad(rs.getString("nacionalidad"));
+                    autores.add(autor);
+                
+            }
+             ps.close();
+            
+        } catch (SQLException ex ) {
+            JOptionPane.showMessageDialog(null, "Error SQL");
+        }
+        
+        return autores;
+        
+    }
+    
     
     
 }

@@ -57,7 +57,7 @@ public class LectorData {
     public Lector buscarLector(int dni){
         Lector lector = null;
         
-            String query = "SELECT * FROM `lector` WHERE dni=? and estado=true";
+        String query = "SELECT * FROM `lector` WHERE dni=?";
 
         try {
             PreparedStatement ps = conexion.prepareStatement(query);
@@ -92,7 +92,7 @@ public class LectorData {
         ArrayList<Lector> lista = new ArrayList<>();
         
         String query = "SELECT `dni`, `direccion`, `nombre`, `apellido` FROM `lector`,prestamo, ejemplar WHERE lector.dni=prestamo.dni_lector "
-                + "and prestamo.id_ejemplar=ejemplar.id_ejemplar and prestamo.estado=1"
+                + "and prestamo.id_ejemplar=ejemplar.id_ejemplar and prestamo.estado=1 "
                 + "and (ejemplar.estado= 'retrasado' or (date_add(prestamo.fecha, interval 1 month) < current_date)) "
                 + "and lector.estado=1";
         
@@ -115,7 +115,7 @@ public class LectorData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al buscar lectores."+ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al buscar lectores. "+ex.getMessage());
         }
         
         return lista;
@@ -225,7 +225,7 @@ public class LectorData {
             ps.close();
     
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al dar de baja a un lector. SQL");
+            JOptionPane.showMessageDialog(null,"Error al dar de alta a un lector. SQL");
         }
     }
     // solamente se permite modificar los lectores que estan dados de alta

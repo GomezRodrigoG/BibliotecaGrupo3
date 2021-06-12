@@ -27,7 +27,9 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    
+    public Libro() {
+    }
+
     
     public void setId_libro(int id_libro) {
         this.id_libro = id_libro;
@@ -83,6 +85,11 @@ public class Libro {
 
     public int getIsbn() {
         return isbn;
+    }
+
+    @Override
+    public String toString() {
+        return  "\nNombre: "+nombre+"\nEditorial: "+editorial+"\nAño: "+año+"\nTipo: "+tipo+"\n--------------------------------\n";
     }
     
     
