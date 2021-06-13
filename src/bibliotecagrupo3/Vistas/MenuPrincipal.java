@@ -9,6 +9,7 @@ import bibliotecaGrupo3.Controllers.Conexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.Context;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,6 +42,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmiOperaciones = new javax.swing.JMenuItem();
         jmiPrestamosVencidos = new javax.swing.JMenuItem();
         jmiMultasMes = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jmMultasXLector = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jmGuardarEjemplar = new javax.swing.JMenuItem();
+        jmVerActualizarEjemplar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -54,7 +60,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Lector");
@@ -84,6 +90,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jmiMultasMes);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Multas");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+
+        jmMultasXLector.setText("historial de multas por Lector");
+        jmMultasXLector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHistorialActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmMultasXLector);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Ejemplar");
+
+        jmGuardarEjemplar.setText("Guardar Ejemplar");
+        jmGuardarEjemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmGuardarEjemplarActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmGuardarEjemplar);
+
+        jmVerActualizarEjemplar.setText("Ver y Actualizar ");
+        jmVerActualizarEjemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmVerActualizarEjemplarActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmVerActualizarEjemplar);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Salir");
 
@@ -153,6 +196,52 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiMultasMesActionPerformed
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHistorialActionPerformed
+        try {
+            escritorio.removeAll();
+            escritorio.repaint();
+            HistorialMultasView hm= new HistorialMultasView(conexion);
+            hm.setVisible(true);
+            escritorio.add(hm);
+            escritorio.moveToFront(hm);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_jHistorialActionPerformed
+
+    private void jmGuardarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGuardarEjemplarActionPerformed
+        try {
+            escritorio.removeAll();
+            escritorio.repaint();
+            CargarEjemplarView ce= new CargarEjemplarView(conexion);
+            ce.setVisible(true);
+            escritorio.add(ce);
+            escritorio.moveToFront(ce);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmGuardarEjemplarActionPerformed
+
+    private void jmVerActualizarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVerActualizarEjemplarActionPerformed
+        try {
+            escritorio.removeAll();
+            escritorio.repaint();
+            VerActualizarEjemplarVew va= new VerActualizarEjemplarVew(conexion);
+            va.setVisible(true);
+            escritorio.add(va);
+            escritorio.moveToFront(va);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmVerActualizarEjemplarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -196,8 +285,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jmGuardarEjemplar;
+    private javax.swing.JMenuItem jmMultasXLector;
+    private javax.swing.JMenuItem jmVerActualizarEjemplar;
     private javax.swing.JMenuItem jmiMultasMes;
     private javax.swing.JMenuItem jmiOperaciones;
     private javax.swing.JMenuItem jmiPrestamosVencidos;

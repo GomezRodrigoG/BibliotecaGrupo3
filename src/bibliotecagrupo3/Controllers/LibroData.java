@@ -86,4 +86,9 @@ public class LibroData {
         }
 }
     
+    public Libro buscarLibro(int isbn){
+    Libro libro= new Libro();
+    return libro;
+    }
+    
 }

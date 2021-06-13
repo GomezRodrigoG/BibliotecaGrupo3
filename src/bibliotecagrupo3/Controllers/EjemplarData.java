@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import bibliotecaGrupo3.Controllers.Conexion;
+import java.util.ArrayList;
 
 /**
  *
@@ -123,7 +124,32 @@ public class EjemplarData {
         return ejemplar;
        
    } 
+      
+   public ArrayList<Ejemplar> buscarEjemplarXIsbn(int isbn){
+        String query="select * from ejemplar where isbn_libro=?";
+       ArrayList< Ejemplar> ejemplar =new ArrayList<>();
+        try {
+            PreparedStatement ps = conexion.prepareStatement(query); 
+                ps.setInt(1,isbn);
+                ResultSet rs=ps.executeQuery();
+                while(rs.next()){
+                   Ejemplar ej = new Ejemplar();
+                    ej.setId_ejemplar(rs.getInt("id_ejemplar"));
+                    ej.setEstado(rs.getString("estado"));
+                    ej.setIsbn_libro(isbn);
+                    ejemplar.add(ej);
+                }
+                
+
+                
+                ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar Ejemplar.");
+        }
         
+        return ejemplar;
+   }
     
     
     

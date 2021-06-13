@@ -27,7 +27,8 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    
+    public Libro(){
+    }
     
     public void setId_libro(int id_libro) {
         this.id_libro = id_libro;

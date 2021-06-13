@@ -126,14 +126,15 @@ public class BibliotecaGrupo3 {
             //eData.eliminarEjemplar(0);
             
             //Prueba de Multa
-//            MultaData mData= new MultaData(conexion);
-//            Multa multa = new Multa();
-           // mData.guardarMulta(3);
+         //  MultaData mData= new MultaData(conexion);
+           // Multa multa = new Multa();
+          //  int a=mData.guardarMulta(3);
+            
            // multa=mData.buscarMulta(7);
            // multa.setFecha_inicio(LocalDate.of(2021,06,04));
            // mData.eliminarMulta(7);
            // mData.modificarMulta(multa);
-           // System.out.println(multa);
+          // System.out.println(a);
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar los driver de conexion");
         }catch (SQLException ex) {
