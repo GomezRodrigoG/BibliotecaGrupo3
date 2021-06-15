@@ -55,6 +55,7 @@ public class LibroData {
             JOptionPane.showMessageDialog(null, "Error SQL");
         }
     }
+
     public Libro buscarLibro(int isbn) {
         String query = "SELECT * FROM libro WHERE libro.isbn = ?";
         Libro libro = null;
@@ -77,8 +78,6 @@ public class LibroData {
         }
         return libro;
     }
-
-    
 
     public void modificarLibro(Libro libro) {
         try {
@@ -115,7 +114,7 @@ public class LibroData {
             JOptionPane.showMessageDialog(null, "Error SQL");
         }
     }
-    
+
     public List<Libro> getAllLibros() {
         String query = "SELECT * FROM libro";
         Libro libro;
@@ -139,5 +138,4 @@ public class LibroData {
         }
         return libros;
     }
-
 }

@@ -27,8 +27,9 @@ public class MultaData {
     
     }
     
-    public void guardarMulta(int libros){
+    public int guardarMulta(int libros){
         String query = "INSERT INTO multa VALUE (null,?,?)";
+        int id=0;
          
         try {
             PreparedStatement statement = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -44,17 +45,22 @@ public class MultaData {
             ResultSet rSet = statement.getGeneratedKeys();
             
             if(rSet.next()){
-                
+                 id= rSet.getInt(1);
                 JOptionPane.showMessageDialog(null,"La Multa se  guardo correctamente.");
+                
+                
             } else {
                 JOptionPane.showMessageDialog(null,"La Multa No se pudo guardar.");
+               
             }
             
             statement.close();
+           
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al guardar la Multa.");
         }
+          return id;
     }  
   
     public Multa buscarMulta(int id_Multa){
