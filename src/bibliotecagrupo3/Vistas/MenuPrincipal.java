@@ -238,43 +238,46 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// GEN-LAST:event_jMenu3ActionPerformed
 
     private void jHistorialActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jHistorialActionPerformed
-        try {
-            escritorio.removeAll();
-            escritorio.repaint();
-            HistorialMultasView hm = new HistorialMultasView(conexion);
-            hm.setVisible(true);
-            escritorio.add(hm);
-            escritorio.moveToFront(hm);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //TODO quitar estos comentarios cuando se suban las vistas
+//        try {
+//            escritorio.removeAll();
+//            escritorio.repaint();
+//            HistorialMultasView hm = new HistorialMultasView(conexion);
+//            hm.setVisible(true);
+//            escritorio.add(hm);
+//            escritorio.moveToFront(hm);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }// GEN-LAST:event_jHistorialActionPerformed
 
     private void jmGuardarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmGuardarEjemplarActionPerformed
-        try {
-            escritorio.removeAll();
-            escritorio.repaint();
-            CargarEjemplarView ce = new CargarEjemplarView(conexion);
-            ce.setVisible(true);
-            escritorio.add(ce);
-            escritorio.moveToFront(ce);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //TODO quitar estos comentarios cuando se suban las vistas
+//        try {
+//            escritorio.removeAll();
+//            escritorio.repaint();
+//            CargarEjemplarView ce = new CargarEjemplarView(conexion);
+//            ce.setVisible(true);
+//            escritorio.add(ce);
+//            escritorio.moveToFront(ce);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }// GEN-LAST:event_jmGuardarEjemplarActionPerformed
 
     private void jmVerActualizarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmVerActualizarEjemplarActionPerformed
-        try {
-            escritorio.removeAll();
-            escritorio.repaint();
-            VerActualizarEjemplarVew va = new VerActualizarEjemplarVew(conexion);
-            va.setVisible(true);
-            escritorio.add(va);
-            escritorio.moveToFront(va);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //TODO quitar estos comentarios cuando se suban las vistas
+//        try {
+//            escritorio.removeAll();
+//            escritorio.repaint();
+//            VerActualizarEjemplarVew va = new VerActualizarEjemplarVew(conexion);
+//            va.setVisible(true);
+//            escritorio.add(va);
+//            escritorio.moveToFront(va);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }// GEN-LAST:event_jmVerActualizarEjemplarActionPerformed
 
     /**
