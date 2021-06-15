@@ -276,18 +276,16 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         
         //creo la multa y doy de baja si es necesario
         if(countMultas > 0){
-            //TODO acomodar cuando pablo modifique el metodo
-            idMulta = 5;
-//            mData.guardarMulta(countMultas);
+            idMulta = mData.guardarMulta(countMultas);
             
             if(darDeBajaLector){
-//                try {
-//                        lData.desactivarLector(this.lector.getDni());
-//                    } catch (ClassNotFoundException ex) {
-//                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (SQLException ex) {
-//                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
+                try {
+                        lData.desactivarLector(this.lector.getDni());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             }
         }
         

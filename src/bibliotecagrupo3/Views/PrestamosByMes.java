@@ -13,7 +13,9 @@ import bibliotecagrupo3.Models.Lector;
 import bibliotecagrupo3.Models.Libro;
 import bibliotecagrupo3.Models.Prestamo;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,6 +55,7 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
         jTablePrestamos = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
         jBLimpiar = new javax.swing.JButton();
+        jdcFecha = new com.toedter.calendar.JDateChooser();
 
         jTextField1.setText("jTextField1");
 
@@ -105,6 +108,8 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
                         .addComponent(jBBuscar)
                         .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
@@ -121,9 +126,11 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jBBuscar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jBBuscar))
+                    .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -145,8 +152,9 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        //TODO Buscar en el JCalendar
-        LocalDate date = LocalDate.now();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(jdcFecha.getDate());
+        LocalDate date = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         
         ArrayList<Prestamo> prestamos = pData.getByDate(date);
         
@@ -203,5 +211,6 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePrestamos;
     private javax.swing.JTextField jTextField1;
+    private com.toedter.calendar.JDateChooser jdcFecha;
     // End of variables declaration//GEN-END:variables
 }
