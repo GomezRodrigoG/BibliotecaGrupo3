@@ -150,7 +150,7 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
         listaPrestamos = prestamoData.getByLector(lector);
         for(Prestamo i:listaPrestamos){
             if(i.getLector().getDni()==lector.getDni()){
-                modelo.addRow(new Object[]{i.getEjemplar().getIsbn_libro(), i.getFecha() });
+                modelo.addRow(new Object[]{i.getEjemplar().getLibro().getIsbn(), i.getFecha() });
             }
         }
     }
