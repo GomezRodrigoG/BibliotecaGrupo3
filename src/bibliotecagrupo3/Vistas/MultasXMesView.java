@@ -125,7 +125,6 @@ public class MultasXMesView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
         int mes = jmchMes.getMonth();
         mes +=1;
         listaLectores = lectorData.getConMulta(mes);

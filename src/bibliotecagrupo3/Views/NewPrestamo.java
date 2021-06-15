@@ -168,7 +168,7 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFDniLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDniLectorActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTFDniLectorActionPerformed
 
     private void jBVerificarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVerificarLectorActionPerformed

@@ -172,7 +172,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmiOperacionesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiOperacionesActionPerformed
         try {
-            // TODO add your handling code here:
             escritorio.removeAll();
             escritorio.repaint();
             LectoresView lv = new LectoresView(conexion);
@@ -186,9 +185,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// GEN-LAST:event_jmiOperacionesActionPerformed
 
     private void jmiPrestamosVencidosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiPrestamosVencidosActionPerformed
-        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             escritorio.removeAll();
             escritorio.repaint();
             PrestamosVencidosView pv = new PrestamosVencidosView(conexion);
@@ -201,9 +198,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// GEN-LAST:event_jmiPrestamosVencidosActionPerformed
 
     private void jmiMultasMesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiMultasMesActionPerformed
-        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             escritorio.removeAll();
             escritorio.repaint();
             MultasXMesView pv = new MultasXMesView(conexion);
@@ -221,7 +216,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jrmiMenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jrmiMenuActionPerformed
         try {
-            // TODO add your handling code here:
             escritorio.removeAll();
             escritorio.repaint();
             LibroView lv = new LibroView(conexion);

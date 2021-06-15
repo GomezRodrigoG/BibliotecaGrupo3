@@ -93,7 +93,7 @@ public class BibliotecaGrupo3 {
             // pData.devolverConMulta(devolverPrestamo);
             // ----devolver prestamo SIN multa
             // pData.devolverSinMulta(devolverPrestamo);
-            // ----obtener prestamos de todo el mes dada una fecha especifica
+            // ----obtener prestamos de el mes dada una fecha especifica
             // ArrayList<Prestamo> auxPrestamosArr = pData.getByDate(LocalDate.now());
             //
             // for(Prestamo prestamoItem :auxPrestamosArr){

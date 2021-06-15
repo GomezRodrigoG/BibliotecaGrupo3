@@ -150,12 +150,12 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
         listaPrestamos = prestamoData.getByLector(lector);
         for(Prestamo i:listaPrestamos){
             if(i.getLector().getDni()==lector.getDni()){
-                modelo.addRow(new Object[]{i.getEjemplar().getLibro().getIsbn(), i.getFecha() });
+                //TODO quitar estos comentarios cuando el ejemplar tenga el getLibro
+//                modelo.addRow(new Object[]{i.getEjemplar().getLibro().getIsbn(), i.getFecha() });
             }
         }
     }
     private void jcbLectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLectoresActionPerformed
-        // TODO add your handling code here:
         cargarDatos();
     }//GEN-LAST:event_jcbLectoresActionPerformed
 

@@ -227,7 +227,6 @@ public class LectoresView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
         try{
             int dni=Integer.parseInt(jtDni.getText());
             Lector lector = lectorData.buscarLector(dni);
@@ -253,7 +252,6 @@ public class LectoresView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaActionPerformed
-        // TODO add your handling code here:
         try{
             int dni=Integer.parseInt(jtDni.getText());
             try {
@@ -267,7 +265,6 @@ public class LectoresView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBajaActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        // TODO add your handling code here:
         try{
             int dni = Integer.parseInt(jtDni.getText());
             String nombre = jtNombre.getText();
@@ -287,7 +284,6 @@ public class LectoresView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
         jtDni.setText("");
         jtNombre.setText("");
         jtApellido.setText("");
@@ -298,7 +294,6 @@ public class LectoresView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
         try{
             String dni = jtDni.getText();
             String nombre = jtNombre.getText();
@@ -319,9 +314,7 @@ public class LectoresView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaActionPerformed
-        // TODO add your handling code here:
-        
-            int dni=Integer.parseInt(jtDni.getText());
+        int dni=Integer.parseInt(jtDni.getText());
             
         try {
             lectorData.activarLector(dni);
