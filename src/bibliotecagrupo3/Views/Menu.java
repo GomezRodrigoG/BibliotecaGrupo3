@@ -52,7 +52,7 @@ public class Menu extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,9 +86,19 @@ public class Menu extends javax.swing.JFrame {
         jMenuPrestamos.add(jMenuItem1);
 
         jMenuItemPrestamoByDate.setText("Prestamos por fecha");
+        jMenuItemPrestamoByDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPrestamoByDateActionPerformed(evt);
+            }
+        });
         jMenuPrestamos.add(jMenuItemPrestamoByDate);
 
         jMenuItemPrestamosByLector.setText("Prestamos por lector");
+        jMenuItemPrestamosByLector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPrestamosByLectorActionPerformed(evt);
+            }
+        });
         jMenuPrestamos.add(jMenuItemPrestamosByLector);
 
         jMenuBar1.add(jMenuPrestamos);
@@ -181,6 +191,39 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(dpView);
         escritorio.moveToFront(dpView);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItemPrestamosByLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPrestamosByLectorActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        PrestamosByLector pLectorView = null;
+        
+        try {
+            pLectorView = new PrestamosByLector(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        pLectorView.setVisible(true);
+        escritorio.add(pLectorView);
+        escritorio.moveToFront(pLectorView);
+                
+    }//GEN-LAST:event_jMenuItemPrestamosByLectorActionPerformed
+
+    private void jMenuItemPrestamoByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPrestamoByDateActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        PrestamosByMes pMesView = null;
+        
+        try {
+            pMesView = new PrestamosByMes(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        pMesView.setVisible(true);
+        escritorio.add(pMesView);
+        escritorio.moveToFront(pMesView);
+    }//GEN-LAST:event_jMenuItemPrestamoByDateActionPerformed
 
     /**
      * @param args the command line arguments

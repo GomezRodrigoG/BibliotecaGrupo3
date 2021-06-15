@@ -8,11 +8,19 @@ package bibliotecagrupo3.Views;
 import bibliotecaGrupo3.Controllers.Conexion;
 import bibliotecagrupo3.Controllers.Helpers;
 import bibliotecagrupo3.Controllers.LectorData;
+import bibliotecagrupo3.Controllers.LibroData;
+import bibliotecagrupo3.Controllers.MultaData;
 import bibliotecagrupo3.Controllers.PrestamoData;
 import bibliotecagrupo3.Models.Lector;
+import bibliotecagrupo3.Models.Libro;
+import bibliotecagrupo3.Models.Multa;
 import bibliotecagrupo3.Models.Prestamo;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +31,8 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
     private DefaultTableModel tableModel;
     private PrestamoData pData;
     private LectorData lData;
+    private LibroData libroData;
+    private MultaData mData;
     private ArrayList<Prestamo> prestamosActivos = new ArrayList<Prestamo>();
     private Lector lector;
 
@@ -31,6 +41,8 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         
         pData = new PrestamoData(conexion);
         lData = new LectorData(conexion);
+        libroData = new LibroData(conexion);
+        mData = new MultaData(conexion);
         tableModel = new DefaultTableModel();
         buildTableHeader();
     }
@@ -50,12 +62,12 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePrestamos = new javax.swing.JTable();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jCB1 = new javax.swing.JCheckBox();
+        jCB2 = new javax.swing.JCheckBox();
+        jCB3 = new javax.swing.JCheckBox();
         jBSalir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jBDevolver = new javax.swing.JButton();
 
         setTitle("Devolver prestamo");
 
@@ -81,19 +93,19 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         jTablePrestamos.setRowHeight(30);
         jScrollPane1.setViewportView(jTablePrestamos);
 
-        jCheckBox1.setText("Devolver");
+        jCB1.setText("Devolver");
 
-        jCheckBox2.setText("Devolver");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        jCB2.setText("Devolver");
+        jCB2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                jCB2ActionPerformed(evt);
             }
         });
 
-        jCheckBox3.setText("Devolver");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+        jCB3.setText("Devolver");
+        jCB3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+                jCB3ActionPerformed(evt);
             }
         });
 
@@ -104,9 +116,19 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("LIMPIAR");
+        jBLimpiar.setText("LIMPIAR");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("DEVOLVER");
+        jBDevolver.setText("DEVOLVER");
+        jBDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDevolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,15 +149,15 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox3))
+                            .addComponent(jCB1)
+                            .addComponent(jCB2)
+                            .addComponent(jCB3))
                         .addContainerGap(25, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(jBDevolver)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jBLimpiar)
                 .addGap(18, 18, 18)
                 .addComponent(jBSalir)
                 .addGap(45, 45, 45))
@@ -153,36 +175,36 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCB1)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox2)
+                        .addComponent(jCB2)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3))
+                        .addComponent(jCB3))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jBLimpiar)
+                    .addComponent(jBDevolver))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void jCB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_jCB2ActionPerformed
    
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+    private void jCB3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }//GEN-LAST:event_jCB3ActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         int dniLector = Helpers.parseStringToInt(jTFDni.getText(), "Dni requerido para poder buscar", "Un DNI solo debe contener numeros.");
@@ -204,12 +226,114 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         clearTable();
         
         for(Prestamo prestamo:prestamosActivos){
-            tableModel.addRow(new Object[]{prestamo.getEjemplar().getId_ejemplar(), prestamo.getFecha()});
+            int isbn = prestamo.getEjemplar().getIsbn_libro();
+            Libro libro = libroData.buscarLibro(isbn);
+            
+            tableModel.addRow(new Object[]{libro.getNombre(), prestamo.getFecha()});
         }
         
     }//GEN-LAST:event_jBBuscarActionPerformed
 
-    public void clearTable(){ 
+    private void jBDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDevolverActionPerformed
+        ArrayList<Boolean> cbSelected = new ArrayList<>();
+        
+        cbSelected.add(jCB1.isSelected());
+        cbSelected.add(jCB2.isSelected());
+        cbSelected.add(jCB3.isSelected());
+        
+        int count = 0;
+        int countMultas = 0;
+        int idMulta = 0;
+        boolean darDeBajaLector = false;
+        
+        // reviso cuantas multas le corresponden
+        for(Prestamo prestamo: prestamosActivos){
+            if(!cbSelected.get(count)){
+                count ++;
+                continue;
+            }
+            
+            LocalDate fechaPlus30 = prestamo.getFecha().plusDays(30);
+            LocalDate fechaPlus90 = prestamo.getFecha().plusDays(90);
+            
+            //genero multa
+            if(fechaPlus30.isBefore(LocalDate.now())){
+                countMultas++;
+                
+                if(fechaPlus90.isBefore(LocalDate.now())){
+                    darDeBajaLector = true;
+                    JOptionPane.showMessageDialog(null, "El prestamo vencio hace mas de 90 dias. Por lo que el lector sera dado de baja.");
+                    
+                    continue;
+                }
+                
+                JOptionPane.showMessageDialog(null, "El prestamo esta vencido. Debera esperar los dias de la multa que le correspondan para volver a pedir un prestamo.");
+                continue;
+            }
+            
+            count ++;
+        }
+        
+        //creo la multa y doy de baja si es necesario
+        if(countMultas > 0){
+            //TODO acomodar cuando pablo modifique el metodo
+            idMulta = 5;
+//            mData.guardarMulta(countMultas);
+            
+            if(darDeBajaLector){
+//                try {
+//                        lData.desactivarLector(this.lector.getDni());
+//                    } catch (ClassNotFoundException ex) {
+//                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (SQLException ex) {
+//                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+            }
+        }
+        
+        count = 0;
+        
+        for(Prestamo prestamo: prestamosActivos){
+            if(!cbSelected.get(count)){
+                count ++;
+                continue;
+            }
+            
+            prestamo.setFecha_devolucion(LocalDate.now());
+            
+            if(idMulta != 0){
+                Multa multa = new Multa();
+                multa.setId_multa(idMulta);
+                
+                prestamo.setMulta(multa);
+                
+                pData.devolverConMulta(prestamo);
+                count ++;
+                continue;
+            }
+            
+            pData.devolverSinMulta(prestamo);
+            count ++;
+            continue;
+            
+        }
+        
+        limpiar();
+    }//GEN-LAST:event_jBDevolverActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void limpiar(){
+        clearTable();
+        jTFDni.setText("");
+        jCB1.setSelected(false);
+        jCB2.setSelected(false);
+        jCB3.setSelected(false);
+    }
+    
+    private void clearTable(){ 
        int rowCount = tableModel.getRowCount()-1;
        
        for(int i = rowCount; i >= 0; i--){
@@ -217,7 +341,7 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
        }
     }
     
-    public void buildTableHeader(){
+    private void buildTableHeader(){
         ArrayList <Object> columnas = new ArrayList<>();
         
         columnas.add("Libro");
@@ -229,25 +353,15 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         
         jTablePrestamos.setModel(tableModel);
     }
-    
-//    public void chargeTable(){
-//        clearTable();
-//        
-//        for(Cursada i:listaCursadas){
-//            if(i.getMateria().getId_materia()==mat.getId_materia()){
-//                modelo.addRow(new Object[]{i.getAlumno().getId_alumno(), i.getAlumno().getNombre(), i.getNota() });
-//            }
-//        }
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBDevolver;
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCB1;
+    private javax.swing.JCheckBox jCB2;
+    private javax.swing.JCheckBox jCB3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
