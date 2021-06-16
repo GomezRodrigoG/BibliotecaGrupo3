@@ -155,9 +155,8 @@ public class PrestamosByLector extends javax.swing.JInternalFrame {
         clearTable();
         
         for(Prestamo prestamo:prestamos){
+            Libro libro = prestamo.getEjemplar().getLibro();
             
-            int isbn = prestamo.getEjemplar().getIsbn_libro();
-            Libro libro = libroData.buscarLibro(isbn);
             String generoMulta = "No";
             
             if(prestamo.getMulta() != null){

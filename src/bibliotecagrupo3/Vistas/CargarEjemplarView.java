@@ -198,9 +198,15 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
             libro = ld.buscarLibro(Integer.parseInt(jtIsbn.getText()));
-           String a = libro.getAutor().getNombre();
+            System.out.println(libro);
+            
+            int idAutor = libro.getAutor().getId_autor();
+            
+            libro.setAutor(ad.buscarAutorPorId(idAutor));
+            
             jtLibro.setText(libro.getNombre());
-            jtAutor.setText(a);
+            jtAutor.setText(libro.getAutor().getNombre());
+            
             jbGuardar.setEnabled(true);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Isbn o DNI ingresado no existe");

@@ -21,9 +21,10 @@ import java.util.ArrayList;
  */
 public class EjemplarData {
       private Connection  conexion ;
-
+      private LibroData ld;
     public EjemplarData(Conexion conexion) throws SQLException {
         this.conexion = conexion.getConexion();
+        ld= new LibroData(conexion);
     }
     
     
@@ -104,7 +105,7 @@ public class EjemplarData {
         Ejemplar ejemplar= null;
        
         try {
-             LibroData ld= new LibroData((Conexion) conexion);
+             
             PreparedStatement ps = conexion.prepareStatement(query); 
                 ps.setInt(1,id_ejemplar);
                 ResultSet rs=ps.executeQuery();
@@ -128,10 +129,10 @@ public class EjemplarData {
    } 
       
    public ArrayList<Ejemplar> buscarEjemplarXIsbn(int isbn){
-        String query="select * from ejemplar where isbn_libro=?";
+       String query="select * from ejemplar where isbn_libro=?";
        ArrayList< Ejemplar> ejemplar =new ArrayList<>();
+       
         try {
-            LibroData ld= new LibroData((Conexion) conexion);
             PreparedStatement ps = conexion.prepareStatement(query); 
                 ps.setInt(1,isbn);
                 ResultSet rs=ps.executeQuery();
@@ -142,8 +143,6 @@ public class EjemplarData {
                     ej.setLibro(ld.buscarLibro(isbn));
                     ejemplar.add(ej);
                 }
-                
-
                 
                 ps.close();
             

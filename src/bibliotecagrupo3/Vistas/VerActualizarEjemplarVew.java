@@ -195,6 +195,7 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
       try{
         Ejemplar ejem=new Ejemplar();
        ejem=ed.buscarEjemplar(Integer.parseInt(jtId.getText()));
+          System.out.println(ejem);
        ejem.setEstado(jtEstado.getText());
       
        ed.actualizarEjemplar(ejem);

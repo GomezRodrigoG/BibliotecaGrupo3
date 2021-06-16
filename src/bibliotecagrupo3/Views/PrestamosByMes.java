@@ -161,8 +161,8 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
         clearTable();
         
         for(Prestamo prestamo:prestamos){
-            int isbn = prestamo.getEjemplar().getIsbn_libro();
-            Libro libro = libroData.buscarLibro(isbn);
+            Libro libro = prestamo.getEjemplar().getLibro();
+            
             String generoMulta = "No";
             
             Lector lector = lData.buscarLector(prestamo.getLector().getDni());

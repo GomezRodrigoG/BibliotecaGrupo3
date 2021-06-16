@@ -54,6 +54,7 @@ public class AutorData {
         }
        
     }
+    
     public Autor buscarAutor(int dni){
         String query = "SELECT * FROM autor WHERE autor.dni = ?";
             Autor autor=null;
@@ -77,6 +78,32 @@ public class AutorData {
         }
         return autor;
     }
+    
+    public Autor buscarAutorPorId (int id){
+        String query = "SELECT * FROM autor WHERE id_autor = ?";
+        Autor autor=null;
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+            autor = new Autor();
+            autor.setId_autor(rs.getInt("id_autor"));
+            autor.setDni(rs.getInt("dni"));
+            autor.setNombre(rs.getString("nombre"));
+            autor.setApellido(rs.getString("apellido"));
+            autor.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
+            autor.setNacionalidad(rs.getString("nacionalidad"));
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AutorData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return autor;
+    }
+    
     public void modificarAutor(Autor autor){
         try {
             String query = "UPDATE autor SET  nombre=?, apellido=?, fecha_nac=?, nacionalidad=? WHERE dni=?";

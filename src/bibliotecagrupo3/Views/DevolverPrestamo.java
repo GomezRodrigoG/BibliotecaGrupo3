@@ -207,7 +207,10 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCB3ActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        int dniLector = Helpers.parseStringToInt(jTFDni.getText(), "Dni requerido para poder buscar", "Un DNI solo debe contener numeros.");
+        String dniRequerido = "Dni requerido para poder buscar";
+        String dniSinLetras = "Un DNI solo debe contener numeros.";
+        
+        int dniLector = Helpers.parseStringToInt(jTFDni.getText(), dniRequerido , dniSinLetras);
         
         lector = lData.buscarLector(dniLector);
         
@@ -226,8 +229,7 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         clearTable();
         
         for(Prestamo prestamo:prestamosActivos){
-            int isbn = prestamo.getEjemplar().getIsbn_libro();
-            Libro libro = libroData.buscarLibro(isbn);
+            Libro libro = prestamo.getEjemplar().getLibro();
             
             tableModel.addRow(new Object[]{libro.getNombre(), prestamo.getFecha()});
         }

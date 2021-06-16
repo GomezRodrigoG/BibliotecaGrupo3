@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import bibliotecaGrupo3.Controllers.Conexion;
+import bibliotecagrupo3.Models.Autor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +24,6 @@ import java.util.logging.Logger;
  * Nahuel
  */
 public class LibroData {
-
     private Connection con;
 
     public LibroData(Conexion conexion) throws SQLException {
@@ -60,11 +60,16 @@ public class LibroData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 libro = new Libro();
+                Autor autor = new Autor();
+                
                 libro.setNombre(rs.getString("nombre"));
                 libro.setEditorial(rs.getString("editorial"));
                 libro.setAño(rs.getInt("año"));
                 libro.setTipo(rs.getString("tipo"));
                 libro.setIsbn(rs.getInt("isbn"));
+                autor.setId_autor(rs.getInt("id_autor"));
+                
+                libro.setAutor(autor);
             }
             ps.close();
 
