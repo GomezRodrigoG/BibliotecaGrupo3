@@ -12,17 +12,17 @@ package bibliotecagrupo3.Models;
 public class Ejemplar {
     private int id_ejemplar;
     private String estado;
-    private int isbn_libro;
+    private Libro libro;
 
-    public Ejemplar(int id_ejemplar, String estado, int isbn_libro) {
+    public Ejemplar(int id_ejemplar, String estado, Libro libro) {
         this.id_ejemplar = id_ejemplar;
         this.estado = estado;
-        this.isbn_libro = isbn_libro;
+        this.libro = libro;
     }
 
-    public Ejemplar(String estado, int isbn_libro) {
+    public Ejemplar(String estado, Libro libro) {
         this.estado = estado;
-        this.isbn_libro = isbn_libro;
+        this.libro = libro;
     }
 
     public Ejemplar() {
@@ -45,18 +45,18 @@ public class Ejemplar {
         this.estado = estado;
     }
 
-    public int getIsbn_libro() {
-        return isbn_libro;
+    public Libro getLibro() {
+        return libro;
     }
 
-    public void setIsbn_libro(int isbn_libro) {
-        this.isbn_libro = isbn_libro;
+    public void setLibro(Libro libro) {
+        this.libro = libro;
     }
 
     @Override
     public String toString(){ 
     
-        return ("Id_Ejemplar: "+id_ejemplar+" "+"Estado: "+estado+" Isbn_libro "+isbn_libro);
+        return ("Id_Ejemplar: "+id_ejemplar+" "+"Estado: "+estado+" Isbn_libro "+libro);
     }
 }
 
