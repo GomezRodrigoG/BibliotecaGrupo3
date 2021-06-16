@@ -36,7 +36,7 @@ public class EjemplarData {
             
             
             statement.setString(1,ejemplar.getEstado() );
-            statement.setInt(2, ejemplar.getIsbn_libro());
+            statement.setInt(2, ejemplar.getLibro().getIsbn());
             
             statement.executeUpdate();
             
@@ -102,7 +102,9 @@ public class EjemplarData {
    
           String query="select * from ejemplar where id_ejemplar=?";
         Ejemplar ejemplar= null;
+       
         try {
+             LibroData ld= new LibroData((Conexion) conexion);
             PreparedStatement ps = conexion.prepareStatement(query); 
                 ps.setInt(1,id_ejemplar);
                 ResultSet rs=ps.executeQuery();
@@ -110,7 +112,7 @@ public class EjemplarData {
                     ejemplar = new Ejemplar();
                     ejemplar.setId_ejemplar(id_ejemplar);
                     ejemplar.setEstado(rs.getString("estado"));
-                    ejemplar.setIsbn_libro(rs.getInt("isbn_libro"));
+                    ejemplar.setLibro(ld.buscarLibro(rs.getInt("isbn_libro")));
                 }else{
                 JOptionPane.showMessageDialog(null,"Ejemplar no encontrado.");
 
@@ -129,6 +131,7 @@ public class EjemplarData {
         String query="select * from ejemplar where isbn_libro=?";
        ArrayList< Ejemplar> ejemplar =new ArrayList<>();
         try {
+            LibroData ld= new LibroData((Conexion) conexion);
             PreparedStatement ps = conexion.prepareStatement(query); 
                 ps.setInt(1,isbn);
                 ResultSet rs=ps.executeQuery();
@@ -136,7 +139,7 @@ public class EjemplarData {
                    Ejemplar ej = new Ejemplar();
                     ej.setId_ejemplar(rs.getInt("id_ejemplar"));
                     ej.setEstado(rs.getString("estado"));
-                    ej.setIsbn_libro(isbn);
+                    ej.setLibro(ld.buscarLibro(isbn));
                     ejemplar.add(ej);
                 }
                 
@@ -150,7 +153,8 @@ public class EjemplarData {
         
         return ejemplar;
    }
-    
+
+   
     
     
 }
