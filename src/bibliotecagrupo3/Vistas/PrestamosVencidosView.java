@@ -7,8 +7,10 @@ package bibliotecagrupo3.Vistas;
 
 import bibliotecaGrupo3.Controllers.Conexion;
 import bibliotecagrupo3.Controllers.LectorData;
+import bibliotecagrupo3.Controllers.LibroData;
 import bibliotecagrupo3.Controllers.PrestamoData;
 import bibliotecagrupo3.Models.Lector;
+import bibliotecagrupo3.Models.Libro;
 import bibliotecagrupo3.Models.Prestamo;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
     private ArrayList<Prestamo> listaPrestamos;
     private LectorData lectorData;
     private PrestamoData prestamoData;
+    private LibroData libroData;
     /**
      * Creates new form PrestamosVencidosView
      */
@@ -33,10 +36,11 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         lectorData = new LectorData(conexion);
         listaLectores = lectorData.getPrestamoVencido();
+        libroData = new LibroData(conexion);
         prestamoData = new PrestamoData(conexion);
         cargarLectores();
         armarCabeceraTabla();
-        cargarDatos();
+        cargarDatos(); 
     }
 
     /**
@@ -130,6 +134,7 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
         ArrayList <Object> columnas = new ArrayList<>();
         columnas.add("ISBN LIBRO");
         columnas.add("FECHA PRESTAMO");
+        columnas.add("NOMBRE LIBRO");
         for(Object it:columnas){
             modelo.addColumn(it);
         }
@@ -146,12 +151,12 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
     public void cargarDatos(){
         borrarFilasTabla();
         Lector lector = (Lector)jcbLectores.getSelectedItem();
-        
+        Libro libro; 
         listaPrestamos = prestamoData.getByLector(lector);
         for(Prestamo i:listaPrestamos){
             if(i.getLector().getDni()==lector.getDni()){
-                //TODO quitar estos comentarios cuando el ejemplar tenga el getLibro
-//                modelo.addRow(new Object[]{i.getEjemplar().getLibro().getIsbn(), i.getFecha() });
+                libro = libroData.buscarLibro(i.getEjemplar().getLibro().getIsbn());
+               modelo.addRow(new Object[]{i.getEjemplar().getLibro().getIsbn(), libro.getNombre(), i.getFecha() });
             }
         }
     }
