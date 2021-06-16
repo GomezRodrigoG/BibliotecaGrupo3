@@ -50,7 +50,7 @@ public class AutorData {
             ps.close();
             rs.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al guardar el autor");
         }
        
     }
@@ -93,7 +93,7 @@ public class AutorData {
             else {
             JOptionPane.showMessageDialog(null, "No se Pudo actualizar el autor");}
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al modificar el autor");
         }
     }
     public void eliminarAutor(int dni){
@@ -106,7 +106,7 @@ public class AutorData {
             }else{
             JOptionPane.showMessageDialog(null, "Autor NO eliminado");}
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al eliminar el autor");
         }    
 }
     
@@ -133,7 +133,7 @@ public class AutorData {
              ps.close();
             
         } catch (SQLException ex ) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al obtener todos los autores");
         }
         
         return autores;

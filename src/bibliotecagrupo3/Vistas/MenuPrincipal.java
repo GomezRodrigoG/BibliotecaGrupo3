@@ -35,27 +35,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu3 = new javax.swing.JMenu();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmiPrestamosVencidos = new javax.swing.JMenuItem();
         jmiMultasMes = new javax.swing.JMenuItem();
-
         jmiOperaciones = new javax.swing.JMenuItem();
-
-        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jmMultasXLector = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmGuardarEjemplar = new javax.swing.JMenuItem();
         jmVerActualizarEjemplar = new javax.swing.JMenuItem();
-
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jmLibro = new javax.swing.JMenu();
-        jrmiMenu = new javax.swing.JRadioButtonMenuItem();
+        jrbmLibro = new javax.swing.JRadioButtonMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jrbmAutor = new javax.swing.JRadioButtonMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -63,10 +63,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
-        escritorioLayout.setHorizontalGroup(escritorioLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 400, Short.MAX_VALUE));
-        escritorioLayout.setVerticalGroup(escritorioLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 281, Short.MAX_VALUE));
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 563, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("Lector");
 
@@ -96,8 +100,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Multas");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        jMenu5.setText("Multas");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu3ActionPerformed(evt);
             }
@@ -109,9 +113,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jHistorialActionPerformed(evt);
             }
         });
-        jMenu3.add(jmMultasXLector);
+        jMenu5.add(jmMultasXLector);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu5);
 
         jMenu4.setText("Ejemplar");
 
@@ -147,28 +151,71 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jrmiMenu.setSelected(true);
-        jrmiMenu.setText("Libro");
-        jrmiMenu.addActionListener(new java.awt.event.ActionListener() {
+        jrbmLibro.setSelected(true);
+        jrbmLibro.setText("Libro");
+        jrbmLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrmiMenuActionPerformed(evt);
+                jrbmLibroActionPerformed(evt);
             }
         });
-        jmLibro.add(jrmiMenu);
+        jmLibro.add(jrbmLibro);
 
         jMenuBar1.add(jmLibro);
+
+        jMenu6.setText("Autor");
+
+        jrbmAutor.setSelected(true);
+        jrbmAutor.setText("Autor");
+        jrbmAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbmAutorActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jrbmAutor);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(escritorio));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorio)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorio)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jrbmAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbmAutorActionPerformed
+        try {
+            escritorio.removeAll();
+            escritorio.repaint();
+            AutorView av = new AutorView(conexion);
+            av.setVisible(true);
+            escritorio.add(av);
+            escritorio.moveToFront(av);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexion");
+        }
+    }//GEN-LAST:event_jrbmAutorActionPerformed
+
+    private void jrbmLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbmLibroActionPerformed
+        try {
+            escritorio.removeAll();
+            escritorio.repaint();
+            LibroView lv = new LibroView(conexion);
+            lv.setVisible(true);
+            escritorio.add(lv);
+            escritorio.moveToFront(lv);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexion");
+        }
+    }//GEN-LAST:event_jrbmLibroActionPerformed
 
     private void jmiOperacionesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiOperacionesActionPerformed
         try {
@@ -325,16 +372,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jmLibro;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmGuardarEjemplar;
+    private javax.swing.JMenu jmLibro;
     private javax.swing.JMenuItem jmMultasXLector;
     private javax.swing.JMenuItem jmVerActualizarEjemplar;
     private javax.swing.JMenuItem jmiMultasMes;
     private javax.swing.JMenuItem jmiOperaciones;
     private javax.swing.JMenuItem jmiPrestamosVencidos;
-    private javax.swing.JRadioButtonMenuItem jrmiMenu;
+    private javax.swing.JRadioButtonMenuItem jrbmAutor;
+    private javax.swing.JRadioButtonMenuItem jrbmLibro;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,26 +39,26 @@ public class BibliotecaGrupo3 {
             Conexion conexion = new Conexion();
 
             // ----PRUEBA AUTOR----
-            // AutorData ad = new AutorData(conexion);
-            // Autor nahuel = new Autor(41272923,"Juan","vargas",LocalDate.of(1998, 6,
+            AutorData ad = new AutorData(conexion);
+            Autor juan = new Autor(12345678,"Juan","R",LocalDate.of(1998, 6,10),"Americano");
             // 13),"Uruguay");
 
-            // CRUD
-            // ad.guardarAutor(nahuel);
+            // CRUD Autor
+            //ad.guardarAutor(juan);
             // System.out.println(ad.buscarAutor(41272923));
-            // ad.modificarAutor(nahuel);
-            // ad.eliminarAutor(41272923);
+            // ad.modificarAutor(juan);
+            // ad.eliminarAutor(12345678);
 
             // BUSCAR TODOS LOS AUTORES
-            // System.out.println(ad.getAllAutores());
+             //System.out.println(ad.getAllAutores());
 
             // ----PRUEBA LIBRO----
             LibroData ld = new LibroData(conexion);
-            // Libro libro1 = new Libro(7,"El chapulin colorado","Biblioteca
-            // Mexicana",1997,"Comedia",8);
+            Libro libro1 = new Libro("El chapulin colorado","Biblioteca Mexicana",1997,"Comedia",8);
+            // 
 
-            // CRUD
-            // ld.guardarLibro(libro1);
+            // CRUD Libro
+             //ld.guardarLibro(libro1);
             // System.out.println(ld.buscarLibro(1));
             // ld.modificarLibro(libro1);
             // ld.borrarLibro(10);
