@@ -11,15 +11,16 @@ package bibliotecagrupo3.Models;
  */
 public class Libro {
     private int id_libro;
-    private int id_autor;
+    private Autor autor;
     private String nombre;
     private String editorial;
     private int año;
     private String tipo;
     private int isbn;
 
-    public Libro(int id_autor, String nombre, String editorial, int año, String tipo, int isbn) {
-        this.id_autor = id_autor;
+    public Libro(int id_libro, Autor autor, String nombre, String editorial, int año, String tipo, int isbn) {
+        this.id_libro = id_libro;
+        this.autor = autor;
         this.nombre = nombre;
         this.editorial = editorial;
         this.año = año;
@@ -27,6 +28,25 @@ public class Libro {
         this.isbn = isbn;
     }
 
+    
+    public Libro(Autor autor, String nombre, String editorial, int año, String tipo, int isbn) {
+        this.autor = autor;
+        this.nombre = nombre;
+        this.editorial = editorial;
+        this.año = año;
+        this.tipo = tipo;
+        this.isbn = isbn;
+    }
+
+    public Libro(String nombre, String editorial, int año, String tipo, int isbn) {
+        this.nombre = nombre;
+        this.editorial = editorial;
+        this.año = año;
+        this.tipo = tipo;
+        this.isbn = isbn;
+    }
+
+    
     public Libro() {
     }
 
@@ -34,9 +54,15 @@ public class Libro {
         this.id_libro = id_libro;
     }
 
-    public void setId_autor(int id_autor) {
-        this.id_autor = id_autor;
+    public Autor getAutor() {
+        return autor;
     }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -62,9 +88,7 @@ public class Libro {
         return id_libro;
     }
 
-    public int getId_autor() {
-        return id_autor;
-    }
+    
 
     public String getNombre() {
         return nombre;

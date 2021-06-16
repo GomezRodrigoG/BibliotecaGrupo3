@@ -34,25 +34,20 @@ public class LibroData {
         try {
             String query = "INSERT INTO libro (id_autor, nombre, editorial, año, tipo, isbn) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, libro.getId_autor());
+            ps.setInt(1, libro.getAutor().getId_autor());
             ps.setString(2, libro.getNombre());
             ps.setString(3, libro.getEditorial());
             ps.setInt(4, libro.getAño());
             ps.setString(5, libro.getTipo());
             ps.setInt(6, libro.getIsbn());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
+            
 
-            if (rs.next()) {
-                libro.setId_libro(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Libro guardado");
-            } else {
-                JOptionPane.showMessageDialog(null, "Libro no guardado");
-            }
+            JOptionPane.showMessageDialog(null,"Libro guardado");
             ps.close();
-            rs.close();
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al guardar el libro");
         }
     }
 
@@ -74,7 +69,7 @@ public class LibroData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al buscar el libro");
         }
         return libro;
     }
@@ -83,7 +78,7 @@ public class LibroData {
         try {
             String query = "UPDATE libro SET id_autor=?, nombre=?, editorial=?, año=?, tipo=? WHERE isbn=?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, libro.getId_autor());
+            ps.setInt(1, libro.getAutor().getId_autor());
             ps.setString(2, libro.getNombre());
             ps.setString(3, libro.getEditorial());
             ps.setInt(4, libro.getAño());
@@ -96,7 +91,7 @@ public class LibroData {
                 JOptionPane.showMessageDialog(null, "Error al modificar el Libro");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al modificar el libro");
         }
     }
 
@@ -111,7 +106,7 @@ public class LibroData {
                 JOptionPane.showMessageDialog(null, "Libro no borrado");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al borrar el libro");
         }
     }
 
@@ -134,7 +129,7 @@ public class LibroData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error al obtener todos libro");
         }
         return libros;
     }

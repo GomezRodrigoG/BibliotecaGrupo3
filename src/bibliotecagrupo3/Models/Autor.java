@@ -19,6 +19,16 @@ public class Autor {
     private LocalDate fecha_nac;
     private String nacionalidad;
 
+    public Autor(int id_autor, int dni, String nombre, String apellido, LocalDate fecha_nac, String nacionalidad) {
+        this.id_autor = id_autor;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fecha_nac = fecha_nac;
+        this.nacionalidad = nacionalidad;
+    }
+
+    
     public Autor( int dni, String nombre, String apellido, LocalDate fecha_nac, String nacionalidad) {
         
         this.dni = dni;
@@ -81,7 +91,7 @@ public class Autor {
 
     @Override
     public String toString() {
-        return   "\nNombre: " + nombre + "\nApellido: " + apellido +"\nDni: " + dni+ "\nFecha Nacimiento: " + fecha_nac + "\nNacionalidad: " + nacionalidad +"\n--------------------------------\n";
+        return nombre+" - "+apellido+" - Dni: "+dni+" - Fecha Nacimiento: "+fecha_nac+" - "+ nacionalidad;
     }
     
     
