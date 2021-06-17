@@ -251,7 +251,7 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
             }
             
             for(Ejemplar ejemplar: ejemplaresParaDarDeBaja){
-                ejemplar.setEstado("retraso");
+                ejemplar.setEstado("retrasado");
                 eData.actualizarEjemplar(ejemplar);
             }
             
