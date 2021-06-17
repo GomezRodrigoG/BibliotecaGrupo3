@@ -274,7 +274,7 @@ public class LectoresView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Nombre, direccion o Apellido se encuentran vacios");
             }
             else{
-                Lector lector = new Lector(dni, direccion, apellido, nombre, true);
+                Lector lector = new Lector(dni, direccion, nombre,apellido, true);
                 lectorData.modificarLector(lector);
             }
         }catch(NumberFormatException ex){
@@ -305,7 +305,7 @@ public class LectoresView extends javax.swing.JInternalFrame {
             }
             else{
                 int DNI = Integer.parseInt(dni);
-                Lector lector = new Lector(DNI, direccion, apellido, nombre, true);
+                Lector lector = new Lector(DNI, direccion, nombre, apellido, true);
                 lectorData.guardarLector(lector);
             }
         }catch(NumberFormatException nf){
