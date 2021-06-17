@@ -178,7 +178,7 @@ public class PrestamoData {
     // este metodo permite a un usuario devolver un prestamo al cual se le genero una multa desde la vista
     public void devolverConMulta(Prestamo prestamo){
         // id_prestamo | id_multa | id_ejemplar | dni_lector | estado | fecha | fecha_devolucion
-        String query = "UPDATE prestamo SET id_multa = ?, fecha_devolucion = ? WHERE id_prestamo = ?";
+        String query = "UPDATE prestamo SET id_multa = ?, fecha_devolucion = ?, estado = false WHERE id_prestamo = ?";
         
         try {
             PreparedStatement statement = conexion.prepareStatement(query);
@@ -204,7 +204,7 @@ public class PrestamoData {
     // este metodo permite a un usuario devolver un prestamo al cual NO se le genero una multa desde la vista
     public void devolverSinMulta(Prestamo prestamo){
         // id_prestamo | id_multa | id_ejemplar | dni_lector | estado | fecha | fecha_devolucion
-        String query = "UPDATE prestamo SET fecha_devolucion = ? WHERE id_prestamo = ?";
+        String query = "UPDATE prestamo SET fecha_devolucion = ?, estado = false WHERE id_prestamo = ?";
         
         try {
             PreparedStatement statement = conexion.prepareStatement(query);
