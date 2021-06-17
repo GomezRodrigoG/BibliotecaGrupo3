@@ -255,6 +255,7 @@ public class PrestamoData {
     
     // metodo que dado un lector devuelve todos sus prestamos
     public ArrayList<Prestamo> getByLector(Lector lector){
+        System.out.println(lector);
         String query = "SELECT `id_prestamo`, `id_multa`, `id_ejemplar`, `dni_lector`, `estado`, `fecha`, `fecha_devolucion` FROM `prestamo` WHERE dni_lector = ?";
         ArrayList<Prestamo> toRet = new ArrayList<>();
         

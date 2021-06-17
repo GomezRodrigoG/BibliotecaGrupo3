@@ -231,8 +231,9 @@ public class HistorialMultasView extends javax.swing.JInternalFrame {
         prestamo = pd.getByLector(lector);
         for(int i=0;i<prestamo.size();i++){
         libro=prestamo.get(i).getEjemplar().getLibro();
-        LocalDate fechaFin = prestamo.get(i).getMulta().getFecha_fin();
+        
            if(prestamo.get(i).getMulta()!= null ){
+               LocalDate fechaFin = prestamo.get(i).getMulta().getFecha_fin();
                //devuelve si la fecha actual es menor a la que se termnina la multa
                if(fecha.isBefore( fechaFin) ){
                modelo.addRow(new Object[]{prestamo.get(i).getMulta().getId_multa(),prestamo.get(i).getMulta().getFecha_inicio(),
@@ -248,8 +249,9 @@ public class HistorialMultasView extends javax.swing.JInternalFrame {
         prestamo = pd.getByLector(lector);
         for(int i=0;i<prestamo.size();i++){
         libro=prestamo.get(i).getEjemplar().getLibro();
-        LocalDate fechaFin = prestamo.get(i).getMulta().getFecha_fin();
+        
            if(prestamo.get(i).getMulta()!= null ){
+               LocalDate fechaFin = prestamo.get(i).getMulta().getFecha_fin();
                //devuelve si la fecha actual es Mayor a la que se termnina la multa
                if(fecha.isAfter(fechaFin) ){
                modelo.addRow(new Object[]{prestamo.get(i).getMulta().getId_multa(),prestamo.get(i).getMulta().getFecha_inicio(),

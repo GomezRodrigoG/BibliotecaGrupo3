@@ -13,6 +13,7 @@ import bibliotecagrupo3.Models.Lector;
 import bibliotecagrupo3.Models.Libro;
 import bibliotecagrupo3.Models.Prestamo;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -153,10 +154,26 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
         Lector lector = (Lector)jcbLectores.getSelectedItem();
         Libro libro; 
         listaPrestamos = prestamoData.getByLector(lector);
-        for(Prestamo i:listaPrestamos){
-            if(i.getLector().getDni()==lector.getDni()){
-                libro = libroData.buscarLibro(i.getEjemplar().getLibro().getIsbn());
-               modelo.addRow(new Object[]{i.getEjemplar().getLibro().getIsbn(), libro.getNombre(), i.getFecha() });
+        //che, dame todos los prestamos
+        //bueno, TOMA TODOS
+        for(Prestamo p:listaPrestamos){
+            if(p.getLector().getDni()==lector.getDni()){
+                if(!p.isEstado()){
+                    continue;
+                }
+                
+                if(!p.getEjemplar().getEstado().equals("retrasado")){
+                    continue;
+                } 
+                
+                LocalDate fechaPlus30 = p.getFecha().plusDays(30);
+
+                if(fechaPlus30.isAfter(LocalDate.now())){
+                    continue;
+                }
+                    
+               libro = libroData.buscarLibro(p.getEjemplar().getLibro().getIsbn());
+               modelo.addRow(new Object[]{p.getEjemplar().getLibro().getIsbn(), libro.getNombre(), p.getFecha() });
             }
         }
     }
