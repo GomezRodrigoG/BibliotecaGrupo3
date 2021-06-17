@@ -6,6 +6,7 @@
 package bibliotecagrupo3.Vistas;
 
 import bibliotecaGrupo3.Controllers.Conexion;
+import bibliotecagrupo3.Controllers.Helpers;
 import bibliotecagrupo3.Controllers.PrestamoData;
 import bibliotecagrupo3.Models.Ejemplar;
 import bibliotecagrupo3.Models.Lector;
@@ -19,8 +20,8 @@ import javax.swing.JOptionPane;
  * @author Rodrigo
  */
 public class PrestamoView extends javax.swing.JInternalFrame {
-
     private PrestamoData pData;
+    private Prestamo prestamo;
     
     public PrestamoView(Conexion conexion) throws SQLException {
         initComponents();
@@ -54,9 +55,7 @@ public class PrestamoView extends javax.swing.JInternalFrame {
         jTFFecha = new javax.swing.JTextField();
         jTFFechaDevolucion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jBGuardar = new javax.swing.JButton();
-        jBBajar = new javax.swing.JButton();
-        jBActualizar = new javax.swing.JButton();
+        jBBaja = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jBLimpiar = new javax.swing.JButton();
 
@@ -92,6 +91,8 @@ public class PrestamoView extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado");
 
+        jcbEstado.setEnabled(false);
+
         jLabel6.setText("Fecha de Prestamo");
 
         jTFFecha.setEditable(false);
@@ -100,11 +101,12 @@ public class PrestamoView extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Fecha de Devolucion");
 
-        jBGuardar.setText("GUARDAR");
-
-        jBBajar.setText("BAJA");
-
-        jBActualizar.setText("ACTUALIZAR");
+        jBBaja.setText("BAJA");
+        jBBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBajaActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("SALIR");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +116,11 @@ public class PrestamoView extends javax.swing.JInternalFrame {
         });
 
         jBLimpiar.setText("LIMPIAR");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,7 +132,7 @@ public class PrestamoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addComponent(jTFId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(jBBuscar)
@@ -157,18 +164,12 @@ public class PrestamoView extends javax.swing.JInternalFrame {
                                             .addComponent(jTFFechaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE))))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBLimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(jBBajar)
-                        .addGap(45, 45, 45)
-                        .addComponent(jBActualizar)))
+                .addGap(18, 18, 18)
+                .addComponent(jBLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBBaja)
+                .addGap(83, 83, 83)
+                .addComponent(jBSalir)
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
@@ -207,14 +208,10 @@ public class PrestamoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBGuardar)
-                    .addComponent(jBBajar)
-                    .addComponent(jBActualizar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSalir)
-                    .addComponent(jBLimpiar))
-                .addGap(18, 18, 18))
+                    .addComponent(jBBaja)
+                    .addComponent(jBLimpiar)
+                    .addComponent(jBSalir))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -228,29 +225,22 @@ public class PrestamoView extends javax.swing.JInternalFrame {
         limpiarMenosID();
         
         // vereficacion del campo id
-        String idString = jTFId.getText();
+        int id = Helpers.parseStringToInt(jTFId.getText(), "Para buscar un prestamo necesitamos su ID.", "El campo id solo admite números.");
         
-        if(idString.equals("")){
-            JOptionPane.showMessageDialog(null,"Para buscar un prestamo necesitamos su ID.");
-            return;
-        }
+        if(id == 0) return;
         
-        int id = 0;
+        prestamo = pData.buscar(id);
+
+        if(prestamo == null) return;
         
-        try{
-            id = Integer.parseInt(idString);
-        } catch ( NumberFormatException nf ){
-            JOptionPane.showMessageDialog(null, "El campo id solo admite números.");
-            return;
-        }
-        
-        Prestamo prestamo = pData.buscar(id);
         Multa multa = prestamo.getMulta();
         Ejemplar ejemplar = prestamo.getEjemplar();
         Lector lector = prestamo.getLector();
         
         if(multa != null){
             jTFIdMulta.setText(multa.getId_multa() + "");
+        } else {
+            jTFIdMulta.setText("SIN MULTA");
         }
         
         jTFIdEjemplar.setText(ejemplar.getId_ejemplar() + "");
@@ -258,14 +248,45 @@ public class PrestamoView extends javax.swing.JInternalFrame {
         jTFDniLector.setText(lector.getDni() + "");
 
         jcbEstado.setSelected(prestamo.isEstado());
+        
+        jTFFecha.setText(prestamo.getFecha().toString());
+        
+        if(prestamo.getFecha_devolucion() == null){
+            jTFFechaDevolucion.setText("SIN DEVOLVER");
+        } else {
+            jTFFechaDevolucion.setText(prestamo.getFecha_devolucion().toString());
+        }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void limpiarID(){
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiarID();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBajaActionPerformed
+        if(!prestamo.isEstado()){
+            JOptionPane.showMessageDialog(null,"El prestamo ya esta dado de baja");
+            return;
+        }
         
+        pData.borrar(prestamo.getId_prestamo());
+        
+        limpiarID();
+        
+        return;
+    }//GEN-LAST:event_jBBajaActionPerformed
+
+    private void limpiarID(){
+        jTFId.setText("");
+        jTFIdMulta.setText("");
+        jTFIdEjemplar.setText("");
+        jTFDniLector.setText("");
+        jcbEstado.setSelected(false);
+        jTFFechaDevolucion.setText("");
+        jTFFecha.setText("");
     }
     
     private void limpiarMenosID(){
@@ -273,14 +294,13 @@ public class PrestamoView extends javax.swing.JInternalFrame {
         jTFIdEjemplar.setText("");
         jTFDniLector.setText("");
         jcbEstado.setSelected(false);
-
+        jTFFechaDevolucion.setText("");
+        jTFFecha.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBActualizar;
-    private javax.swing.JButton jBBajar;
+    private javax.swing.JButton jBBaja;
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLabel1;
