@@ -50,12 +50,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jmGuardarEjemplar = new javax.swing.JMenuItem();
         jmVerActualizarEjemplar = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jmLibro = new javax.swing.JMenu();
         jrbmLibro = new javax.swing.JRadioButtonMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jrbmAutor = new javax.swing.JRadioButtonMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMINuevoPrestamo = new javax.swing.JMenuItem();
+        jMIDevolver = new javax.swing.JMenuItem();
+        jMIBuscar = new javax.swing.JMenuItem();
+        jMIPrestamoPorFecha = new javax.swing.JMenuItem();
+        jMIPrestamoPorLector = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMISalir = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -137,13 +143,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu2.setText("Salir");
-
-        jMenuItem4.setText("jMenuItem4");
-        jMenu2.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu2);
-
         jmLibro.setText("Libro");
         jmLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +173,67 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu6.add(jrbmAutor);
 
         jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Prestamo");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
+
+        jMINuevoPrestamo.setText("Nuevo Prestamo");
+        jMINuevoPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMINuevoPrestamoActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMINuevoPrestamo);
+
+        jMIDevolver.setText("Devolver");
+        jMIDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIDevolverActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIDevolver);
+
+        jMIBuscar.setText("Buscar");
+        jMIBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIBuscarActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIBuscar);
+
+        jMIPrestamoPorFecha.setText("Prestamo por Fecha");
+        jMIPrestamoPorFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIPrestamoPorFechaActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIPrestamoPorFecha);
+
+        jMIPrestamoPorLector.setText("Prestamo por Lector");
+        jMIPrestamoPorLector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIPrestamoPorLectorActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIPrestamoPorLector);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu2.setText("Salir");
+
+        jMISalir.setText("Salir");
+        jMISalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMISalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMISalir);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -216,6 +276,94 @@ public class MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error de conexion");
         }
     }//GEN-LAST:event_jrbmLibroActionPerformed
+
+    private void jMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMISalirActionPerformed
+
+    private void jMINuevoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMINuevoPrestamoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        NewPrestamo npView = null;
+        
+        try {
+            npView = new NewPrestamo(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        npView.setVisible(true);
+        escritorio.add(npView);
+        escritorio.moveToFront(npView);
+    }//GEN-LAST:event_jMINuevoPrestamoActionPerformed
+
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+
+    }//GEN-LAST:event_jMenu7ActionPerformed
+
+    private void jMIDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIDevolverActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        DevolverPrestamo dpView = null;
+        
+        try {
+            dpView = new DevolverPrestamo(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        dpView.setVisible(true);
+        escritorio.add(dpView);
+        escritorio.moveToFront(dpView);
+    }//GEN-LAST:event_jMIDevolverActionPerformed
+
+    private void jMIBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIBuscarActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        PrestamoView pView = null;
+        
+        try {
+            pView = new PrestamoView(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        pView.setVisible(true);
+        escritorio.add(pView);
+        escritorio.moveToFront(pView);
+    }//GEN-LAST:event_jMIBuscarActionPerformed
+
+    private void jMIPrestamoPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPrestamoPorFechaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        PrestamosByMes pMesView = null;
+        
+        try {
+            pMesView = new PrestamosByMes(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        pMesView.setVisible(true);
+        escritorio.add(pMesView);
+        escritorio.moveToFront(pMesView);
+    }//GEN-LAST:event_jMIPrestamoPorFechaActionPerformed
+
+    private void jMIPrestamoPorLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPrestamoPorLectorActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        PrestamosByLector pLectorView = null;
+        
+        try {
+            pLectorView = new PrestamosByLector(conexion);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion");
+        }
+        
+        pLectorView.setVisible(true);
+        escritorio.add(pLectorView);
+        escritorio.moveToFront(pLectorView);
+    }//GEN-LAST:event_jMIPrestamoPorLectorActionPerformed
 
     private void jmiOperacionesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiOperacionesActionPerformed
         try {
@@ -369,14 +517,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jMIBuscar;
+    private javax.swing.JMenuItem jMIDevolver;
+    private javax.swing.JMenuItem jMINuevoPrestamo;
+    private javax.swing.JMenuItem jMIPrestamoPorFecha;
+    private javax.swing.JMenuItem jMIPrestamoPorLector;
+    private javax.swing.JMenuItem jMISalir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmGuardarEjemplar;
     private javax.swing.JMenu jmLibro;
     private javax.swing.JMenuItem jmMultasXLector;
