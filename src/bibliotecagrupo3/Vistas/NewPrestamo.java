@@ -206,8 +206,8 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
         //reviso los prestamos verificando si puede o no concretarse el prestamo
         for(Prestamo prestamo: prestamos){
             Multa multa = prestamo.getMulta();
-          
-            if(!prestamo.isEstado()) continue;
+            
+            System.out.println("esta es la multa: " + multa);
             
             //si la multa si existe, verifico si ya paso
             if(multa != null){
@@ -216,6 +216,8 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
                     return;
                 }
             }
+            
+            if(!prestamo.isEstado()) continue;
             
             if(prestamo.getFecha_devolucion() == null){
                 countPrestamosActivos++;
