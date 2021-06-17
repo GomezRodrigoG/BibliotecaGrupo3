@@ -38,6 +38,14 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
         ejemplar = new ArrayList<>();
        
         armarCabeceraTabla();
+        cargarComboBox();
+    }
+    
+    public void cargarComboBox(){
+    jcEstado.addItem("disponible");
+    jcEstado.addItem("prestado");
+    jcEstado.addItem("retraso");
+    jcEstado.addItem("reparación");
     }
     
       public void armarCabeceraTabla(){
@@ -81,8 +89,8 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtEstado = new javax.swing.JTextField();
         jbSalir = new javax.swing.JButton();
+        jcEstado = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("ISBN");
@@ -98,6 +106,11 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtaEjemplar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtaEjemplarMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaEjemplar);
 
         jbBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -130,6 +143,8 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
             }
         });
 
+        jcEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,8 +168,8 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtId, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(jtEstado))
+                            .addComponent(jcEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtId, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addGap(36, 36, 36)
                         .addComponent(jbActualizar)))
                 .addContainerGap(167, Short.MAX_VALUE))
@@ -182,10 +197,10 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(jbSalir)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,9 +209,9 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
       try{
         Ejemplar ejem=new Ejemplar();
+        
        ejem=ed.buscarEjemplar(Integer.parseInt(jtId.getText()));
-          System.out.println(ejem);
-       ejem.setEstado(jtEstado.getText());
+       ejem.setEstado(jcEstado.getSelectedItem().toString());
       
        ed.actualizarEjemplar(ejem);
        } catch (NumberFormatException co) {
@@ -225,6 +240,10 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jtaEjemplarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtaEjemplarMouseClicked
+       jtId.setText(jtaEjemplar.getValueAt(jtaEjemplar.getSelectedRow(),0).toString());
+    }//GEN-LAST:event_jtaEjemplarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -234,7 +253,7 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JTextField jtEstado;
+    private javax.swing.JComboBox<String> jcEstado;
     private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtIsbn;
     private javax.swing.JTable jtaEjemplar;

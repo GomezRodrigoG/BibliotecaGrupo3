@@ -37,7 +37,15 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
         ld = new LibroData(conexion);
         autor = new Autor();
         ad = new AutorData(conexion);
+        cargarComboBox();
         
+    }
+    
+    public void cargarComboBox(){
+    jcEstado.addItem("disponible");
+    jcEstado.addItem("prestado");
+    jcEstado.addItem("retraso");
+    jcEstado.addItem("reparación");
     }
     
 
@@ -54,7 +62,6 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
         jtIsbn = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtEstado = new javax.swing.JTextField();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
@@ -62,6 +69,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
         jtLibro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jtAutor = new javax.swing.JTextField();
+        jcEstado = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("ISBN: ");
@@ -107,6 +115,8 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
 
         jtAutor.setEditable(false);
 
+        jcEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,7 +145,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(98, 98, 98)
@@ -160,7 +170,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -169,7 +179,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbSalir))
@@ -182,10 +192,10 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
     try{
        ejemplar.setLibro(ld.buscarLibro(Integer.parseInt(jtIsbn.getText())));
-       ejemplar.setEstado(jtEstado.getText());
+       ejemplar.setEstado(jcEstado.getSelectedItem().toString());
        ed.guardarEjemplar(ejemplar);
        jtIsbn.setText("");
-       jtEstado.setText("");
+       
        } catch (NumberFormatException co) {
             JOptionPane.showMessageDialog(null, "Isbn ingresado no existe");
         }
@@ -223,8 +233,8 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcEstado;
     private javax.swing.JTextField jtAutor;
-    private javax.swing.JTextField jtEstado;
     private javax.swing.JTextField jtIsbn;
     private javax.swing.JTextField jtLibro;
     // End of variables declaration//GEN-END:variables
