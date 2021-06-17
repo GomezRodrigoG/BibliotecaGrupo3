@@ -6,8 +6,10 @@
 package bibliotecagrupo3.Vistas;
 
 import bibliotecaGrupo3.Controllers.Conexion;
+import bibliotecagrupo3.Controllers.AutorData;
 import bibliotecagrupo3.Controllers.EjemplarData;
 import bibliotecagrupo3.Controllers.LibroData;
+import bibliotecagrupo3.Models.Autor;
 import bibliotecagrupo3.Models.Ejemplar;
 import bibliotecagrupo3.Models.Libro;
 import java.sql.SQLException;
@@ -25,6 +27,7 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
         private LibroData ld;
         private EjemplarData ed;
         private ArrayList<Ejemplar> ejemplar;
+        private AutorData ad;
        
     /**
      * Creates new form VerActualizarEjemplarVew
@@ -36,6 +39,7 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
         ld = new LibroData(conexion);
         ed = new EjemplarData(conexion);
         ejemplar = new ArrayList<>();
+        ad=new AutorData(conexion);
        
         armarCabeceraTabla();
         cargarComboBox();
@@ -44,7 +48,7 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
     public void cargarComboBox(){
     jcEstado.addItem("disponible");
     jcEstado.addItem("prestado");
-    jcEstado.addItem("retraso");
+    jcEstado.addItem("retrasado");
     jcEstado.addItem("reparación");
     }
     
@@ -159,9 +163,6 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
                         .addGap(26, 26, 26)
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -171,8 +172,11 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
                             .addComponent(jcEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtId, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addGap(36, 36, 36)
-                        .addComponent(jbActualizar)))
-                .addContainerGap(167, Short.MAX_VALUE))
+                        .addComponent(jbActualizar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +204,7 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
                     .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(jbSalir)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,16 +227,20 @@ public class VerActualizarEjemplarVew extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
     try{
         borrarFilasTabla();
-        Libro l= ld.buscarLibro(Integer.parseInt(jtIsbn.getText()));
+        Libro lib= ld.buscarLibro(Integer.parseInt(jtIsbn.getText()));
+        Autor autor = ad.buscarAutorPorId(lib.getAutor().getId_autor());
+        if(lib==null){
+        JOptionPane.showMessageDialog(null, "Isbn o Id ingresado no existe");
+        }else{
         ejemplar=ed.buscarEjemplarXIsbn(Integer.parseInt(jtIsbn.getText()));
         for(Ejemplar it:ejemplar){
-             modelo.addRow(new Object[]{it.getId_ejemplar(),it.getEstado(),it.getLibro().getNombre(),it.getLibro().getTipo(),});
+             modelo.addRow(new Object[]{it.getId_ejemplar(),it.getEstado(),it.getLibro().getNombre(),it.getLibro().getTipo(),autor.getApellido()+" "+autor.getNombre()});
         }
-        jtIsbn.setText("");
+        }
         } catch (NumberFormatException co) {
             JOptionPane.showMessageDialog(null, "Isbn ingresado no existe");
         }
-
+    
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed

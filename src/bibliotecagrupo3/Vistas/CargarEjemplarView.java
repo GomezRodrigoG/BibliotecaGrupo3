@@ -44,7 +44,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
     public void cargarComboBox(){
     jcEstado.addItem("disponible");
     jcEstado.addItem("prestado");
-    jcEstado.addItem("retraso");
+    jcEstado.addItem("retrasado");
     jcEstado.addItem("reparación");
     }
     
@@ -70,6 +70,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtAutor = new javax.swing.JTextField();
         jcEstado = new javax.swing.JComboBox<>();
+        jbLimpiar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("ISBN: ");
@@ -82,7 +83,6 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
 
         jbGuardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jbGuardar.setText("Guardar");
-        jbGuardar.setEnabled(false);
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -117,17 +117,20 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
 
         jcEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
+        jbLimpiar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jtLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -152,11 +155,24 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel4)))
                                 .addGap(69, 69, 69))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jtLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jbGuardar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jbLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 41, Short.MAX_VALUE)))))
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,11 +195,12 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
+                    .addComponent(jbLimpiar)
                     .addComponent(jbSalir))
-                .addGap(28, 28, 28))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -194,7 +211,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
        ejemplar.setLibro(ld.buscarLibro(Integer.parseInt(jtIsbn.getText())));
        ejemplar.setEstado(jcEstado.getSelectedItem().toString());
        ed.guardarEjemplar(ejemplar);
-       jtIsbn.setText("");
+       
        
        } catch (NumberFormatException co) {
             JOptionPane.showMessageDialog(null, "Isbn ingresado no existe");
@@ -208,20 +225,30 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
             libro = ld.buscarLibro(Integer.parseInt(jtIsbn.getText()));
-            System.out.println(libro);
+            if(libro==null){
+              JOptionPane.showMessageDialog(null, "Isbn del Libro ingresado no existe");  
+            }else{
             
             int idAutor = libro.getAutor().getId_autor();
             
             libro.setAutor(ad.buscarAutorPorId(idAutor));
             
             jtLibro.setText(libro.getNombre());
-            jtAutor.setText(libro.getAutor().getNombre());
+            jtAutor.setText(libro.getAutor().getNombre()+" "+libro.getAutor().getApellido());
             
-            jbGuardar.setEnabled(true);
+            
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Isbn o DNI ingresado no existe");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        jtIsbn.setText("");
+        jtLibro.setText("");
+        jtAutor.setText("");
+
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -232,6 +259,7 @@ public class CargarEjemplarView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcEstado;
     private javax.swing.JTextField jtAutor;
