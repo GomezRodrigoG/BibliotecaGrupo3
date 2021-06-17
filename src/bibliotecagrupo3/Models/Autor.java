@@ -91,7 +91,7 @@ public class Autor {
 
     @Override
     public String toString() {
-        return nombre+" - "+apellido+" - Dni: "+dni+" - Fecha Nacimiento: "+fecha_nac+" - "+ nacionalidad;
+        return nombre+" "+apellido+" - Dni: "+dni+" - "+ nacionalidad;
     }
     
     

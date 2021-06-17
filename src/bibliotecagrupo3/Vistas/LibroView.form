@@ -46,7 +46,7 @@
                           <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
@@ -60,7 +60,7 @@
                               <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jtfIsbn" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jcbAutor" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                          <Component id="jcbAutor" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -136,7 +136,7 @@
                   <Component id="jbSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="84" max="32767" attributes="0"/>
+              <EmptySpace pref="88" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
