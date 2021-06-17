@@ -195,16 +195,19 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
         
         ArrayList<Prestamo> prestamos = pData.getByLector(this.lector);
         
+        ArrayList<Ejemplar> ejemplaresParaDarDeBaja = new ArrayList<>();
+        
+        int countPrestamosVencidos = 0;
+        
+        boolean darDeBajaLector = false;
+        
         int countPrestamosActivos = 0;
         
         //reviso los prestamos verificando si puede o no concretarse el prestamo
         for(Prestamo prestamo: prestamos){
             Multa multa = prestamo.getMulta();
           
-            if(!prestamo.isEstado()){
-                System.out.println("Prestamo deshabilitado");
-                continue;
-            }
+            if(!prestamo.isEstado()) continue;
             
             //si la multa si existe, verifico si ya paso
             if(multa != null){
@@ -222,30 +225,40 @@ public class NewPrestamo extends javax.swing.JInternalFrame {
             LocalDate fechaPlus90 = prestamo.getFecha().plusDays(90);
             
             if(fechaPlus30.isBefore(LocalDate.now())){
-                this.ejemplar.setEstado("retraso");
-        
-                eData.actualizarEjemplar(this.ejemplar);
+                ejemplaresParaDarDeBaja.add(prestamo.getEjemplar());
                 
-                if(fechaPlus90.isBefore(LocalDate.now())){
-                    JOptionPane.showMessageDialog(null, "El lector tiene un prestamo vencido hace mas de 90 dias. Por lo que sera dado de baja.");
-                    
-                    try {
-                        lData.desactivarLector(this.lector.getDni());
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    return;
-                }
+                if(fechaPlus90.isBefore(LocalDate.now())) darDeBajaLector = true;
                 
-                JOptionPane.showMessageDialog(null, "El lector tiene un prestamo vencido. Debera devolver el libro y luego esperar los dias de la multa que le correspondan");
-                return;
+                countPrestamosVencidos ++;
+                
+                continue;
             }
         }
         
-        if(countPrestamosActivos>3){
+        if(countPrestamosVencidos>0){
+            JOptionPane.showMessageDialog(null, "El lector tiene " + countPrestamosVencidos + " prestamo/s vencido/s. Debera devolver el/los libro/s y luego esperar los dias de la multa que le correspondan");
+            
+            if(darDeBajaLector){
+                JOptionPane.showMessageDialog(null, "El lector tiene un prestamo vencido hace mas de 90 dias. Por lo que sera dado de baja.");
+                    
+                try {
+                    lData.desactivarLector(this.lector.getDni());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            for(Ejemplar ejemplar: ejemplaresParaDarDeBaja){
+                ejemplar.setEstado("retraso");
+                eData.actualizarEjemplar(ejemplar);
+            }
+            
+            return;
+        }
+        
+        if(countPrestamosActivos>2){
             JOptionPane.showMessageDialog(null,"El lector ya tiene 3 prestamos en este momento, por lo que no podra solicitar un prestamo.");
             return;
         }
