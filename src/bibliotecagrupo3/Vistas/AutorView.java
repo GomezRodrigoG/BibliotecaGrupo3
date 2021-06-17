@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -25,7 +26,14 @@ public class AutorView extends javax.swing.JInternalFrame {
 
     public AutorView(Conexion con) throws SQLException {
         initComponents();
+        
+        Date fecha2 = new Date(105, 0,1);
         autorData = new AutorData(con);
+        jdcFn.setDate(fecha2);
+        ((JTextField) this.jdcFn.getDateEditor()).setEditable(false);
+        //jdcFn.setDate(Date.valueOf(LocalDate.now()));
+        
+        
     }
 
     /**
@@ -147,12 +155,12 @@ public class AutorView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel6))
                         .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jdcFn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jtfDni, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jtfNacionalidad, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jtfApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jdcFn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbGuardar)
@@ -194,7 +202,7 @@ public class AutorView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jtfNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbBorrar)
@@ -274,15 +282,15 @@ public class AutorView extends javax.swing.JInternalFrame {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         String fecha = formato.format(jdcFn.getDate());
         LocalDate fecha_nac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+  
+        if(fecha_nac.getYear()>1500&&fecha_nac.getYear()<2005){
         autor.setFecha_nac(fecha_nac);
-        /*int nacimiento = fecha_nac.getYear();
-        int hoy = LocalDate.now().getYear();
-        if(nacimiento>1500&&hoy<2005){
-        autor.setFecha_nac(fecha_nac);
+        autorData.guardarAutor(autor);
+            
         }else{
                 JOptionPane.showMessageDialog(null, "No se cumple con la fecha de nacimiento del escritor tiene que tener un rango de 1500-2005");
-            }*/
-        autorData.guardarAutor(autor);
+                return;
+            }
         limpiar();
 
         ////////////////
@@ -349,11 +357,8 @@ public class AutorView extends javax.swing.JInternalFrame {
             return;
         }
         autor.setApellido(apellido);
-        /*//////////FECHA NACIMIENTO/////////
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        String fecha = formato.format(jdcFn.getDate());
-        LocalDate fecha_nac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        autor.setFecha_nac(fecha_nac);*/
+        //////////FECHA NACIMIENTO/////////
+        
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         String fecha = formato.format(jdcFn.getDate());
         LocalDate fecha_nac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));

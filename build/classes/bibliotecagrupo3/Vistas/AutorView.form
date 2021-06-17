@@ -50,12 +50,12 @@
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jtfNombre" min="-2" pref="131" max="-2" attributes="0"/>
-                          <Component id="jdcFn" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtfDni" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                          <Component id="jtfNacionalidad" min="-2" pref="131" max="-2" attributes="0"/>
-                          <Component id="jtfApellido" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jtfNombre" pref="131" max="32767" attributes="0"/>
+                          <Component id="jtfDni" alignment="0" pref="131" max="32767" attributes="0"/>
+                          <Component id="jtfNacionalidad" pref="131" max="32767" attributes="0"/>
+                          <Component id="jtfApellido" alignment="0" pref="131" max="32767" attributes="0"/>
+                          <Component id="jdcFn" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -109,7 +109,7 @@
                   <Component id="jtfNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbLimpiar" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbBorrar" alignment="3" min="-2" max="-2" attributes="0"/>

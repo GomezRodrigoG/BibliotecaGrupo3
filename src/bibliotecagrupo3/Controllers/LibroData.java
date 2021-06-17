@@ -47,7 +47,7 @@ public class LibroData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al guardar el libro");
+            JOptionPane.showMessageDialog(null, "Error al guardar el libro o no se permiten libros con ISBN repetidos");
         }
     }
 
@@ -70,6 +70,9 @@ public class LibroData {
                 autor.setId_autor(rs.getInt("id_autor"));
                 
                 libro.setAutor(autor);
+            }
+            if(libro==null){
+            JOptionPane.showMessageDialog(null, "Este libro no existe");
             }
             ps.close();
 

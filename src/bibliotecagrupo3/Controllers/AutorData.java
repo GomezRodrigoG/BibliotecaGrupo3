@@ -131,9 +131,9 @@ public class AutorData {
             if(ps.executeUpdate()==1){
             JOptionPane.showMessageDialog(null, "Autor borrado");
             }else{
-            JOptionPane.showMessageDialog(null, "Autor NO eliminado");}
+            JOptionPane.showMessageDialog(null, "Autor NO eliminado, puede que no exista o tiene datos en otros elementos relacionados a el lo cual no deja que lo eliminemos");}
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el autor");
+            JOptionPane.showMessageDialog(null, "Error al eliminar el autor, puede que no exista");
         }    
 }
     
