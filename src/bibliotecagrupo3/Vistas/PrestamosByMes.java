@@ -12,6 +12,9 @@ import bibliotecagrupo3.Controllers.PrestamoData;
 import bibliotecagrupo3.Models.Lector;
 import bibliotecagrupo3.Models.Libro;
 import bibliotecagrupo3.Models.Prestamo;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,6 +40,12 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
         libroData = new LibroData(conexion);
         tableModel = new DefaultTableModel();
         buildTableHeader();
+        
+        JDateChooser chooser = new JDateChooser();
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) jdcFecha.getDateEditor();
+        editor.setEditable(false);
+
+        jdcFecha.setDate(Date.valueOf(LocalDate.now()));
     }
 
     /**
@@ -153,6 +162,7 @@ public class PrestamosByMes extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        
         String fecha = formato.format(jdcFecha.getDate());
         LocalDate date = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         
