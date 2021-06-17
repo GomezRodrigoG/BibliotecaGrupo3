@@ -7,6 +7,7 @@ package bibliotecagrupo3.Vistas;
 
 import bibliotecagrupo3.Vistas.NewPrestamo;
 import bibliotecaGrupo3.Controllers.Conexion;
+import bibliotecagrupo3.Controllers.EjemplarData;
 import bibliotecagrupo3.Controllers.Helpers;
 import bibliotecagrupo3.Controllers.LectorData;
 import bibliotecagrupo3.Controllers.LibroData;
@@ -34,6 +35,7 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
     private LectorData lData;
     private LibroData libroData;
     private MultaData mData;
+    private EjemplarData eData;
     private ArrayList<Prestamo> prestamosActivos = new ArrayList<Prestamo>();
     private Lector lector;
 
@@ -45,6 +47,7 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
         libroData = new LibroData(conexion);
         mData = new MultaData(conexion);
         tableModel = new DefaultTableModel();
+        eData = new EjemplarData(conexion);
         buildTableHeader();
     }
 
@@ -283,12 +286,12 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
             
             if(darDeBajaLector){
                 try {
-                        lData.desactivarLector(this.lector.getDni());
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    lData.desactivarLector(this.lector.getDni());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(NewPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         
@@ -301,6 +304,10 @@ public class DevolverPrestamo extends javax.swing.JInternalFrame {
             }
             
             prestamo.setFecha_devolucion(LocalDate.now());
+            
+            prestamo.getEjemplar().setEstado("disponible");
+            
+            eData.actualizarEjemplar(prestamo.getEjemplar());
             
             if(idMulta != 0){
                 Multa multa = new Multa();
