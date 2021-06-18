@@ -15,6 +15,7 @@ import bibliotecagrupo3.Models.Prestamo;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -134,8 +135,8 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
     public void armarCabeceraTabla(){
         ArrayList <Object> columnas = new ArrayList<>();
         columnas.add("ISBN LIBRO");
-        columnas.add("FECHA PRESTAMO");
         columnas.add("NOMBRE LIBRO");
+        columnas.add("FECHA PRESTAMO");
         for(Object it:columnas){
             modelo.addColumn(it);
         }
@@ -153,9 +154,8 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
         borrarFilasTabla();
         Lector lector = (Lector)jcbLectores.getSelectedItem();
         Libro libro; 
-        listaPrestamos = prestamoData.getByLector(lector);
-        //che, dame todos los prestamos
-        //bueno, TOMA TODOS
+        if(!(lector==null)){
+            listaPrestamos = prestamoData.getByLector(lector);
         for(Prestamo p:listaPrestamos){
             if(p.getLector().getDni()==lector.getDni()){
                 if(!p.isEstado()){
@@ -176,6 +176,10 @@ public class PrestamosVencidosView extends javax.swing.JInternalFrame {
                modelo.addRow(new Object[]{p.getEjemplar().getLibro().getIsbn(), libro.getNombre(), p.getFecha() });
             }
         }
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay prestamos vencidos");
+        }
+        
     }
     private void jcbLectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbLectoresActionPerformed
         cargarDatos();

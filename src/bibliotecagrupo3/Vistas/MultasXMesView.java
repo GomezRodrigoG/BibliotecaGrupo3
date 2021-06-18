@@ -128,6 +128,7 @@ public class MultasXMesView extends javax.swing.JInternalFrame {
         int mes = jmchMes.getMonth();
         mes +=1;
         listaLectores = lectorData.getConMulta(mes);
+        
         cargarDatos(mes);
     }//GEN-LAST:event_jbBuscarActionPerformed
     

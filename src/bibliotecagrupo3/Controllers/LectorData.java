@@ -93,8 +93,7 @@ public class LectorData {
         
         String query = "SELECT `dni`, `direccion`, `nombre`, `apellido` FROM `lector`,prestamo, ejemplar WHERE lector.dni=prestamo.dni_lector "
                 + "and prestamo.id_ejemplar=ejemplar.id_ejemplar and prestamo.estado=1 "
-                + "and (ejemplar.estado= 'retrasado' or (date_add(prestamo.fecha, interval 1 month) < current_date)) "
-                + "and lector.estado=1";
+                + "and (ejemplar.estado= 'retrasado' or (date_add(prestamo.fecha, interval 1 month) < current_date)) ";
         
         try {
             PreparedStatement ps = conexion.prepareStatement(query);
